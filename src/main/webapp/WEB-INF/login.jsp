@@ -1,21 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
-  User: joakimnilfjord
-  Date: 3/5/2017 AD
-  Time: 12:54 AM
+  User: DevSingh
+  Date: 3/6/17
+  Time: 16:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<body>
+<head>
+    <title>Login</title>
+</head>
 <h2>Register</h2>
-    <form action="/register" method="post">
-        type:<br/>
-        <input type="text" name="type"/>
-        <br/>
-        name:<br/>
-        <input type="text" name="name"/>
-        <br/>
+    <form action="/login" method="post">
         Username:<br/>
         <input type="text" name="username"/>
         <br/>

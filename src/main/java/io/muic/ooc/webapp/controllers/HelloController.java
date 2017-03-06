@@ -1,12 +1,17 @@
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import io.muic.ooc.webapp.entities.Customer;
+import io.muic.ooc.webapp.entities.User;
+import io.muic.ooc.webapp.entities.UserGroup;
+import io.muic.ooc.webapp.repositories.CustomerRepository;
+import io.muic.ooc.webapp.repositories.UserGroupRepository;
+import io.muic.ooc.webapp.repositories.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

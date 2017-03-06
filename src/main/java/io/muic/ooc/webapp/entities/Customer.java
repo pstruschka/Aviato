@@ -1,5 +1,5 @@
 // tag::sample[]
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

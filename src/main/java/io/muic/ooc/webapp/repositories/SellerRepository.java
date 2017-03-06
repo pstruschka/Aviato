@@ -1,5 +1,6 @@
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.repositories;
 
+import io.muic.ooc.webapp.entities.Seller;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

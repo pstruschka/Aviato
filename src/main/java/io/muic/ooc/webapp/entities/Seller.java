@@ -1,4 +1,4 @@
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Created by joakimnilfjord on 3/5/2017 AD.
  */
 @Entity
-class Seller {
+public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
