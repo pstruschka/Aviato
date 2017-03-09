@@ -23,8 +23,13 @@ public class LoginController {
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login");
-		return modelAndView;
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser" ) {
+			modelAndView.setViewName("login");
+			return modelAndView;
+		} else {
+			return new ModelAndView("redirect:/admin/home");
+		}
+
 	}
 	
 	
