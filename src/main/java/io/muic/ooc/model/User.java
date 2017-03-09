@@ -2,16 +2,7 @@ package io.muic.ooc.model;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -47,9 +38,11 @@ public class User {
 	@Column(name = "active")
 	private int active;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "role")
+	private Role role;
+
+	private String roleString;
 
 	public int getId() {
 		return id;
@@ -91,6 +84,14 @@ public class User {
 		this.username = username;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public int getActive() {
 		return active;
 	}
@@ -99,12 +100,11 @@ public class User {
 		this.active = active;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public String getRoleString() {
+		return roleString;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleString(String roleString) {
+		this.roleString = roleString;
 	}
-
 }

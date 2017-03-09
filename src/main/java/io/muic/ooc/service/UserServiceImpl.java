@@ -23,16 +23,16 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public User findUserByUsername(String email) {
-		return userRepository.findByUsername(email);
+	public User findUserByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 	@Override
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepository.findByRole(user.getRoleString());
+        user.setRole(userRole);
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
 

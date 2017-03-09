@@ -7,5 +7,5 @@ import io.muic.ooc.model.User;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
-	 User findByUsername(String email);
+	 User findByUsername(String username);
 }

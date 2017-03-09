@@ -22,6 +22,7 @@ public class LoginController {
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
@@ -44,7 +45,7 @@ public class LoginController {
 		if (userExists != null) {
 			bindingResult
 					.rejectValue("username", "error.user",
-							"There is already a user registered with the username provided");
+							"The username " + user.getUsername() + " is already registered");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
@@ -60,6 +61,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
 	public ModelAndView home(){
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
