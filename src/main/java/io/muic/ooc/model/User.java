@@ -1,7 +1,5 @@
 package io.muic.ooc.model;
 
-import java.util.Set;
-
 import javax.persistence.*;
 
 import org.hibernate.validator.constraints.Length;
@@ -75,7 +73,6 @@ public class User {
 	}
 
 	public String getUsername() {
-
 		return username;
 	}
 
