@@ -73,6 +73,7 @@ public class User {
 	}
 
 	public String getUsername() {
+
 		return username;
 	}
 
@@ -95,4 +96,5 @@ public class User {
 	public void setActive(int active) {
 		this.active = active;
 	}
+
 }

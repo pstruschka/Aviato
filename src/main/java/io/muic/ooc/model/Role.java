@@ -15,8 +15,6 @@ public class Role {
 	@Column(name="role")
 	private String role;
 
-//	@OneToMany
-//	private List<User> users;
 	
 	public int getId() {
 		return id;
@@ -30,5 +28,4 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
 }
