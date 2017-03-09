@@ -24,8 +24,13 @@ public class LoginController {
 	public ModelAndView login(){
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login");
-		return modelAndView;
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser" ) {
+			modelAndView.setViewName("login");
+			return modelAndView;
+		} else {
+			return new ModelAndView("redirect:/admin/home");
+		}
+
 	}
 	
 	
