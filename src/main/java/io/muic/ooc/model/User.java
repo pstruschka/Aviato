@@ -38,11 +38,9 @@ public class User {
 	@Column(name = "active")
 	private int active;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "role")
 	private Role role;
-
-	private String roleString;
 
 	public int getId() {
 		return id;
@@ -77,6 +75,7 @@ public class User {
 	}
 
 	public String getUsername() {
+
 		return username;
 	}
 
@@ -98,13 +97,5 @@ public class User {
 
 	public void setActive(int active) {
 		this.active = active;
-	}
-
-	public String getRoleString() {
-		return roleString;
-	}
-
-	public void setRoleString(String roleString) {
-		this.roleString = roleString;
 	}
 }

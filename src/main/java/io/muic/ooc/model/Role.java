@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 public class Role {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="role_id")
@@ -13,9 +14,6 @@ public class Role {
 
 	@Column(name="role")
 	private String role;
-
-//	@OneToMany
-//	private List<User> users;
 	
 	public int getId() {
 		return id;
@@ -29,13 +27,4 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
-//	public List<User> getUsers() {
-//		return users;
-//	}
-
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
-	
-	
 }
