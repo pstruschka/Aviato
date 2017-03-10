@@ -38,10 +38,19 @@
 								placeholder="Last Name" class="form-control" /> 
 						</div>
 					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{role}"
+								   placeholder="Role" class="form-control" />
+						</div>
+					</div>
+
 					<div class="form-group">
 						<div class="col-sm-9">
 							<input type="text" th:field="*{username}" placeholder="Username"
-								class="form-control" /> <label
+								class="form-control" />
+							<label
 								th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
 								class="validation-message"></label>
 						</div>

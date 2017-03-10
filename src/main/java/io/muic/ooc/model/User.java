@@ -83,14 +83,6 @@ public class User {
 		this.username = username;
 	}
 
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
-	}
-
 	public Role getRole() {
 		return role;
 	}
@@ -99,4 +91,11 @@ public class User {
 		this.role = role;
 	}
 
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
 }
