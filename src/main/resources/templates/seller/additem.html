@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration Form</title>
+    <title>Product Form</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,49 +14,44 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/add}"
+            <form autocomplete="off" action="#" th:action="@{/additem}"
                   th:object="${product}" method="post" class="form-horizontal"
                   role="form">
-                <h2>Registration Form</h2>
+                <h2>Product Form</h2>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                               class="validation-message"></label>
-                        <input type="text" th:field="*{productname}" placeholder="Name"
+                        <input type="text" th:field="*{productName}" placeholder="Product Name"
                                class="form-control" />
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="number" th:field="*{price}"
+                               placeholder="Price" class="form-control" />
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                                  class="validation-message"></label>
-                        <input type="text" th:field="*{price}"
-                               placeholder="Last Name" class="form-control" />
+                        <input type="number" th:field="*{quantity}"
+                               placeholder="Quantity" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{quantity}"
-                               placeholder="Role" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{description}" placeholder="Username"
+                        <input type="text" th:field="*{description}" placeholder="Description"
                                class="form-control" />
                         <label
-                                th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                                 class="validation-message"></label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block">Register User</button>
+                        <button type="submit" class="btn btn-primary btn-block">Add Product</button>
                     </div>
                 </div>
                 <span th:utext="${successMessage}"></span>

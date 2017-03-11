@@ -5,6 +5,7 @@ package io.muic.ooc.model;
  */
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 public class Product {
@@ -32,29 +33,24 @@ public class Product {
         this.productName = productName;
     }
 
-    public void setQuantity(int quantity) {
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 
     public String getProductName() {
         return productName;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getRating() {
-        return rating;
-    }
 
     public String getDescription() {
         return description;
@@ -70,5 +66,13 @@ public class Product {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }
