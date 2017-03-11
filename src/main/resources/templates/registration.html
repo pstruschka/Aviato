@@ -23,8 +23,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-9">
-						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-								class="validation-message"></label>
+						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></label>
 						<input type="text" th:field="*{name}" placeholder="Name"
 								class="form-control" /> 
 						</div>

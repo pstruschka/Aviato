@@ -1,8 +1,12 @@
 package io.muic.ooc.controller;
 
+import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.ProductService;
+import io.muic.ooc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,26 @@ import javax.validation.Valid;
 public class AddItemController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/additem", method = RequestMethod.POST)
+    public ModelAndView createNewProduct(@Valid Product product) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        productService.saveProduct(product,user);
+        modelAndView.addObject("successMessage", "Product added successfully");
+        modelAndView.addObject("product", new Product());
+        modelAndView.setViewName("seller/additem");
+        return modelAndView;
+
+    }
+
+
+
+
 
 
 

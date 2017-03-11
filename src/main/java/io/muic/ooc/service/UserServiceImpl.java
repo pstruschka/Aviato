@@ -1,8 +1,5 @@
 package io.muic.ooc.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import io.muic.ooc.repository.RoleRepository;
 import io.muic.ooc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

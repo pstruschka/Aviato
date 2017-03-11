@@ -1,5 +1,6 @@
 package io.muic.ooc.controller;
 
+import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,12 @@ public class SellerHomeController {
     @RequestMapping(value="/additem", method = RequestMethod.GET)
     public ModelAndView add(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("seller/addItem");
+        modelAndView.setViewName("seller/additem");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        Product product = new Product();
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("product",product);
         return modelAndView;
     }
 }
