@@ -38,9 +38,7 @@ public class AddItemController {
         productService.saveProduct(product,user);
         modelAndView.addObject("successMessage", "Product added successfully");
         modelAndView.addObject("product", new Product());
-
         }
-
         return modelAndView;
 
     }

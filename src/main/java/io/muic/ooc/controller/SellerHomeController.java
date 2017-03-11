@@ -1,5 +1,7 @@
 package io.muic.ooc.controller;
 
+import com.sun.javafx.sg.prism.NGShape;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.UserService;
@@ -39,6 +41,13 @@ public class SellerHomeController {
         Product product = new Product();
         modelAndView.addObject("user", user);
         modelAndView.addObject("product",product);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/viewproducts",method = RequestMethod.GET)
+    public ModelAndView view() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("seller/viewproducts");
         return modelAndView;
     }
 }

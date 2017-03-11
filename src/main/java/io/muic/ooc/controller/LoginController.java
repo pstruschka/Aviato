@@ -12,7 +12,6 @@ import io.muic.ooc.service.UserService;
 
 @Controller
 public class LoginController {
-	
 	@Autowired
 	private UserService userService;
 

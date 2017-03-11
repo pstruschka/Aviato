@@ -41,7 +41,7 @@ public class RegistrationController {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "Product has successfully been added into you inventory");
+            modelAndView.addObject("successMessage", "Your Registration is complete");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
 
