@@ -28,54 +28,39 @@ public class LoginController {
 			modelAndView.setViewName("login");
 			return modelAndView;
 		} else {
+
 			return new ModelAndView("redirect:/admin/home");
 		}
 
 	}
-	
-	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
-	public ModelAndView registration(){
-		ModelAndView modelAndView = new ModelAndView();
-		User user = new User();
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("registration");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
-		User userExists = userService.findUserByUsername(user.getUsername());
-		if (userExists != null) {
-			bindingResult
-					.rejectValue("username", "error.user",
-							"The username " + user.getUsername() + " is already registered");
-		}
-		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
-		} else {
-			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "User has been registered successfully");
-			modelAndView.addObject("user", new User());
-			modelAndView.setViewName("registration");
-			
-		}
-		return modelAndView;
-	}
-	
+
 	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
 	public ModelAndView home(){
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 		User user = userService.findUserByUsername(auth.getName());
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
 	}
+
+	@RequestMapping(value="/seller/home", method = RequestMethod.GET)
+	public ModelAndView sellerHome(){
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
+		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+		modelAndView.setViewName("seller/home");
+		return modelAndView;
+	}
+
+
+	
+
 	
 
 }
