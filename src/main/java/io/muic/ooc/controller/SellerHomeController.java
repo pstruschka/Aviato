@@ -39,6 +39,7 @@ public class SellerHomeController {
         Product product = new Product();
         modelAndView.addObject("user", user);
         modelAndView.addObject("product",product);
+
         return modelAndView;
     }
 }
