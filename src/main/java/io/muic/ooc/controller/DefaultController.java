@@ -14,9 +14,8 @@ public class DefaultController {
         } else if (request.isUserInRole("BUYER")) {
             return "redirect:/buyer/home";
         } else if (request.isUserInRole("SELLER")) {
-            return "redirect:/admin/home";
+            return "redirect:/seller/home";
         } else {
-            System.out.println("OTHERLOG");
             return "redirect:/access-denied";
         }
     }

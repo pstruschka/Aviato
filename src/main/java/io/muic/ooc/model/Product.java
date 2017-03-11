@@ -65,4 +65,11 @@ public class Product {
     public void setPrice(Long price) { this.price = price; }
 
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
