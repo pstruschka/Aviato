@@ -28,14 +28,19 @@ public class AddItemController {
     private UserService userService;
 
     @RequestMapping(value = "/additem", method = RequestMethod.POST)
-    public ModelAndView createNewProduct(@Valid Product product) {
+    public ModelAndView createNewProduct(@Valid Product product,BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("seller/additem");
+
+        if (!bindingResult.hasErrors()) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         productService.saveProduct(product,user);
         modelAndView.addObject("successMessage", "Product added successfully");
         modelAndView.addObject("product", new Product());
-        modelAndView.setViewName("seller/additem");
+
+        }
+
         return modelAndView;
 
     }

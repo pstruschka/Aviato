@@ -21,6 +21,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void saveProduct(Product product,User user) {
+        product.setRating(0);
         product.setUser(user);
         productRepository.save(product);
     }
@@ -35,10 +36,4 @@ public class ProductServiceImpl implements ProductService{
        Iterable<Product> allProducts = productRepository.findAll();
        return allProducts;
     }
-
-
-
-
-
-
 }
