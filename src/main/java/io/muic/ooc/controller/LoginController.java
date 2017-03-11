@@ -37,6 +37,10 @@ public class LoginController {
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
 		ModelAndView modelAndView = new ModelAndView();
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser" ) {
+			modelAndView.setViewName("redirect:/admin/home");
+			return modelAndView;
+		}
 		User user = new User();
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("registration");
@@ -74,6 +78,14 @@ public class LoginController {
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/access-denied", method = RequestMethod.GET)
+	public ModelAndView denied(){
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/access-denied");
 		return modelAndView;
 	}
 	
