@@ -12,7 +12,9 @@ import java.util.List;
 public interface ProductService {
     List<Product> findProductsByUser(User user);
     void saveProduct(Product product,User user);
-    Iterable<Product> findAllProducts();
+    List<Product> findAllProducts();
+    Product findProductById(Long id);
+    void updateProductQuantity(Product product);
 
 
 
