@@ -18,9 +18,14 @@
                 type="Submit">Logout</button>
     </form>
 
-    <form th:action="@{/additem}" method="get">
-        <button class="btn btn-md btn-default btn-block" name="Add User"
+    <form th:action="@{/seller/additem}" method="get">
+        <button class="btn btn-md btn-default btn-block" name="Add Item"
                 type="Submit">Add Product</button>
+    </form>
+
+    <form th:action="@{/seller/myproducts}" method="get">
+        <button class="btn btn-md btn-default btn-block" name="View Products"
+                type="Submit">View My Products</button>
     </form>
 
     <div class="panel-group" style="margin-top:40px">

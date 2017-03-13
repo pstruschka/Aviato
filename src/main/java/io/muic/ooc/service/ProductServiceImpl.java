@@ -8,9 +8,9 @@ import io.muic.ooc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by joakimnilfjord on 3/11/2017 AD.
- */
+import java.util.List;
+
+
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
 
@@ -19,14 +19,19 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void saveProduct(Product product,User user) {
+        product.setRating(0);
         product.setUser(user);
         productRepository.save(product);
-
     }
 
+    @Override
+    public List<Product> findProductsByUser(User user){
+        List<Product> products = productRepository.findProductsByUser(user);
+        return products;
+    }
 
-
-
-
-
+    public Iterable<Product> findAllProducts() {
+       Iterable<Product> allProducts = productRepository.findAll();
+       return allProducts;
+    }
 }

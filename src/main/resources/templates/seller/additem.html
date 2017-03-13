@@ -2,31 +2,35 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Product Form</title>
+    <title>Add Product</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-
+<form th:action="@{/seller/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+</form>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form autocomplete="off" action="#" th:action="@{/additem}"
-                  th:object="${product}" method="post" class="form-horizontal"
+            th:object="${product}" method="post" class="form-horizontal"
                   role="form">
                 <h2>Product Form</h2>
 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" class="validation-message"></label>
                         <input type="text" th:field="*{productName}" placeholder="Product Name"
                                class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="validation-message"></label>
+
                         <input type="number" th:field="*{price}"
                                placeholder="Price" class="form-control" />
                     </div>
@@ -35,6 +39,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message"></label>
                         <input type="number" th:field="*{quantity}"
                                placeholder="Quantity" class="form-control" />
                     </div>
@@ -42,6 +47,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message"></label>
                         <input type="text" th:field="*{description}" placeholder="Description"
                                class="form-control" />
                         <label
