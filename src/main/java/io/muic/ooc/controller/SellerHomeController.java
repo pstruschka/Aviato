@@ -60,6 +60,7 @@ public class SellerHomeController {
         System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+        modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
