@@ -103,4 +103,8 @@ public class Product {
     public void setCartProducts(Set<CartProduct> cartProducts) {
         this.cartProducts = cartProducts;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

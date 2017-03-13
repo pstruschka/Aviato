@@ -31,9 +31,7 @@
                 <td th:text="${product.getDescription()}"></td>
                 <td th:text="${product.getUser().getName()}"></td>
 
-
                 <td><form th:action="@{/buyer/buy}" method="post">
-
                     <input type="hidden" th:value="${product.getId()}" name="product"/>
                     <input type="number" name = "quantity" th:placeholder="Quantity" th:value = 1 class="form-control" />
                     <button class="btn btn-md btn-success btn-block" name="Buy"

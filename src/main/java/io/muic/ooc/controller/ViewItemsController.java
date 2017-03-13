@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+
 import java.util.ArrayList;
 
 /**
@@ -30,7 +32,7 @@ public class ViewItemsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
-        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findAllProducts());
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
@@ -40,7 +42,7 @@ public class ViewItemsController {
     @ResponseBody
     public ModelAndView buyProducts(@ModelAttribute("product") Long productId, @RequestParam("quantity") Long quantity) {
         Product product = productService.findProductById(productId);
-        productService.updateProductQuantity(product,quantity);
+        productService.updateProductQuantity(product);
         return viewUserProducts();
 
     }
