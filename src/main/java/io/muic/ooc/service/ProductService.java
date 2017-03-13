@@ -13,7 +13,9 @@ public interface ProductService {
     //public Product findProductByProductName(String productname);
     public List<Product> findProductsByUser(User user);
     public void saveProduct(Product product,User user);
-    public Iterable<Product> findAllProducts();
+    public List<Product> findAllProducts();
+    public Product findProductById(Long id);
+    public void updateProductQuantity(Product product);
 
 
 
