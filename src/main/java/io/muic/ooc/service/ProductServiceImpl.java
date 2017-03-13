@@ -8,6 +8,7 @@ import io.muic.ooc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -53,8 +54,23 @@ public class ProductServiceImpl implements ProductService{
         return products;
     }
 
-    public Iterable<Product> findAllProducts() {
-       Iterable<Product> allProducts = productRepository.findAll();
+    public List<Product> findAllProducts() {
+       List<Product> allProducts = new ArrayList<>();
+       for (Product p: productRepository.findAll()) {
+           allProducts.add(p);
+       }
        return allProducts;
+    }
+
+    public void updateProductQuantity(Product product) {
+        Long quantity = product.getQuantity();
+        quantity -=1;
+        product.setQuantity(quantity);
+        productRepository.save(product);
+    }
+
+    public Product findProductById(Long id) {
+        Product product = productRepository.findOne(id);
+        return product;
     }
 }
