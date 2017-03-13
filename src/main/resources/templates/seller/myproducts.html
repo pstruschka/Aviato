@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Products</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="page-header">
+    <h3>My Products </h3>
+</div>
+<div class="col-md-12 container-fluid">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Description</th>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td><form th:object="${product}" th:action="@{/seller/edit_product}" method="get">
+                        <button class="btn btn-md btn-primary btn-block" name="edit"
+                                type="Submit">Edit</button>
+                        </form>
+                    </td>
+                    <td><form th:object="${product}" th:action="@{/seller/delete_product}" method="get">
+                        <button class="btn btn-md btn-danger btn-block" name="edit"
+                                type="Submit">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
