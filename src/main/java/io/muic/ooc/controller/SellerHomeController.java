@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +51,7 @@ public class SellerHomeController {
         return modelAndView;
     }
 
+
     @RequestMapping(value="/seller/myproducts",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -60,14 +60,41 @@ public class SellerHomeController {
         System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
 
-    @RequestMapping(value="/seller/edit_product",method = RequestMethod.GET)
+    @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
+    /*
     @ResponseBody
-    public String editUserProduct() {
-        return "edit product";
+    public ModelAndView deleteUserProduct(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/seller/delete_product/${product_name}");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        modelAndView.addObject("user",user);
+        return modelAndView;
     }
+    */
+    public ModelAndView deleteUserProduct(@RequestParam("product") String productName) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/seller/myproducts");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        User user = userService.findUserByUsername(auth.getName());
+        productService.removeProductByProductNameAndUser(productName,user);
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("products", userProducts);
+        return modelAndView;
+    }
+    /*
+    public @ResponseBody String byParameter(@RequestParam("product") String foo) {
+        return "Mapped by path + method + presence of query parameter! (MappingController) - foo = "
+                + foo;
+    }
+    */
+
 }

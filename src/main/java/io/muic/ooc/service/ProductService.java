@@ -13,6 +13,7 @@ public interface ProductService {
     //public Product findProductByProductName(String productname);
     public List<Product> findProductsByUser(User user);
     public void saveProduct(Product product,User user);
+    public void removeProductByProductNameAndUser(String productName, User user);
     public Iterable<Product> findAllProducts();
 
 

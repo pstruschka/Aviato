@@ -25,6 +25,25 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public void removeProductByProductNameAndUser(String productName,User user) {
+        List<Product> products = productRepository.findProductsByUser(user);
+
+
+        for (Product product : products){
+            System.out.println(product.getProductName());
+            if (product.getProductName().equals(productName)){
+
+                productRepository.delete(product);
+            }
+        }
+
+
+    }
+
+
+
+
+    @Override
     public List<Product> findProductsByUser(User user){
         List<Product> products = productRepository.findProductsByUser(user);
         return products;
