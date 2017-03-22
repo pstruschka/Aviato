@@ -26,13 +26,16 @@ public class Product {
     @NotEmpty(message = "*Please provide a Name for your product")
     private String productName;
     @Column(name = "quantity")
-    @DecimalMin(value = "1",message = "*Please provide a positive value for Quantity for your product")
+    @DecimalMin(value = "0",message = "*Please provide a positive value for Quantity for your product")
     @NotNull(message = "*Please provide a quantity for your product")
     private Long quantity;
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
     private Integer rating;
+
+
+
 
     @ManyToOne()
     @JoinColumn(name = "User_id")
@@ -45,6 +48,9 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
+
+
+
 
     public void setProductName(String productName) {
         this.productName = productName;
@@ -92,6 +98,7 @@ public class Product {
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;

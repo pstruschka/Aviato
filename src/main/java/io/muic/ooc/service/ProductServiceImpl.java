@@ -61,12 +61,26 @@ public class ProductServiceImpl implements ProductService{
        }
        return allProducts;
     }
+    public List<Product> findProductsInStock() {
+        List<Product> allProducts = new ArrayList<>();
+        for (Product p: productRepository.findAll()) {
+            if (p.getQuantity() > 0) { allProducts.add(p);}
 
-    public void updateProductQuantity(Product product) {
+        }
+        return allProducts;
+    }
+
+    public Boolean updateProductQuantity(Product product,Long selectedQuantity) {
+        if (selectedQuantity <= product.getQuantity()) {
         Long quantity = product.getQuantity();
-        quantity -=1;
+        quantity -=selectedQuantity;
         product.setQuantity(quantity);
         productRepository.save(product);
+        return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public Product findProductById(Long id) {

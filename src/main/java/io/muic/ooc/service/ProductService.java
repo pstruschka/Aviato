@@ -16,6 +16,4 @@ public interface ProductService {
     public void removeProduct(Product product,User user);
     public Product findProductByIdAndUser(long id, User user);
     public Iterable<Product> findAllProducts();
-
-
 }
