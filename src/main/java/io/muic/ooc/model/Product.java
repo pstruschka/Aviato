@@ -44,6 +44,9 @@ public class Product {
     private Set<CartProduct> cartProducts;
 
 
+
+
+
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -102,9 +105,5 @@ public class Product {
 
     public void setCartProducts(Set<CartProduct> cartProducts) {
         this.cartProducts = cartProducts;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

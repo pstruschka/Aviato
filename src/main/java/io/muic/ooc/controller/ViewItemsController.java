@@ -5,6 +5,7 @@ import io.muic.ooc.model.User;
 import io.muic.ooc.service.ProductService;
 import io.muic.ooc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class ViewItemsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
-        ArrayList<Product> userProducts = new ArrayList<>(productService.findAllProducts());
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
@@ -42,7 +43,7 @@ public class ViewItemsController {
     @ResponseBody
     public ModelAndView buyProducts(@ModelAttribute("product") Long productId, @RequestParam("quantity") Long quantity) {
         Product product = productService.findProductById(productId);
-        productService.updateProductQuantity(product);
+        productService.updateProductQuantity(product,quantity);
         return viewUserProducts();
 
     }

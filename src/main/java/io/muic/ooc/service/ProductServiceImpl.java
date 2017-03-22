@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product findProductByIdAndUser(long id,User user) {
+    public Product findProductByIdAndUser(Long id,User user) {
         List<Product> products = productRepository.findProductsByUser(user);
         Product searchedProduct = null;
         for (Product product : products) {
