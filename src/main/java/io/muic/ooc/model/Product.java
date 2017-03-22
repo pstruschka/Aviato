@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 public class Product {
@@ -20,7 +21,7 @@ public class Product {
     @Column(name = "price")
     @NotNull(message = "*Please provide a Price for your product")
     @DecimalMin(value = "0",message = "*Please provide a positive value for Price for your product")
-    private Long price;
+    private BigDecimal price;
     @Column(name = "product_name")
     @NotEmpty(message = "*Please provide a Name for your product")
     private String productName;
@@ -57,24 +58,21 @@ public class Product {
         this.quantity = quantity;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getProductName() {
         return productName;
     }
 
-
     public String getDescription() {
         return description;
     }
 
-    public Long getPrice() { return price; }
+    public BigDecimal getPrice() { return price; }
 
-    public void setPrice(Long price) { this.price = price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public User getUser() {
         return user;
