@@ -5,8 +5,6 @@ package io.muic.ooc.model;
  */
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
 public class Cart {
@@ -16,45 +14,54 @@ public class Cart {
     @Column(name="cart_id")
     private Long cartId;
 
-    @ManyToMany
-    @JoinTable(name = "cart_product" , joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name="product_id", referencedColumnName = "id"))
-    private HashMap<Product, Long> cartItems;
+//    @OneToMany
+//    @JoinTable(name = "cart_product" , joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
+//            inverseJoinColumns = @JoinColumn(name="product_id", referencedColumnName = "id", table = "product"))
+//    private HashMap<Product, Integer> cartItems;
 
-    private Long cartTotalPrice;
+    //private BigDecimal cartTotalPrice;
 
-    public Cart() {
-        setCartItems(new HashMap<Product, Long>());
-        setCartTotalPrice(0L);
-    }
+    private User user;
+
 
     public Long getCartId() { return cartId; }
 
-    public HashMap<Product, Long> getCartItems() { return cartItems; }
-
-    public void setCartItems(HashMap<Product, Long> cartItems) { this.cartItems = cartItems; }
-
-    public Long getCartTotalPrice() { return cartTotalPrice; }
-
-    public void setCartTotalPrice(Long cartTotalPrice) { this.cartTotalPrice = cartTotalPrice; }
-
-    public void addCartItem(Product item) {
-        if(cartItems.containsKey(item)){
-            cartItems.put(item, cartItems.get(item) + 1);
-        } else {
-            cartItems.put(item,1L);
-        }
-        updateCartTotal();
+    public User getUser() {
+        return user;
     }
 
-    public void removeCartItem(Product item) {
-        cartItems.remove(item);
-        updateCartTotal();
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    private void updateCartTotal() {
-        cartTotalPrice = 0L;
-        for(Map.Entry<Product, Long> entry : cartItems.entrySet())
-            cartTotalPrice += (entry.getValue() * entry.getKey().getPrice());
-    }
+    //public HashMap<Product, Integer> getCartItems() { return cartItems; }
+
+    //public void setCartItems(HashMap<Product, Integer> cartItems) { this.cartItems = cartItems; }
+
+    //public BigDecimal getCartTotalPrice() { return cartTotalPrice; }
+
+    //public void setCartTotalPrice(BigDecimal cartTotalPrice) { this.cartTotalPrice = cartTotalPrice; }
+
+//    public void addCartItem(Product item) {
+//        if(cartItems.containsKey(item)){
+//            cartItems.put(item, cartItems.get(item)+1);
+//        } else {
+//            cartItems.put(item,1);
+//        }
+//        updateCartTotal();
+//    }
+//
+//    public void removeCartItem(Product item) {
+//        cartItems.remove(item);
+//        updateCartTotal();
+//    }
+
+//    private void updateCartTotal() {
+//        cartTotalPrice = BigDecimal.valueOf(0);
+//        for(Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
+//            double quant = entry.getValue().doubleValue();
+//            double price = entry.getKey().getPrice().doubleValue();
+//            cartTotalPrice.add(BigDecimal.valueOf(quant*price));
+//        }
+//    }
 }
