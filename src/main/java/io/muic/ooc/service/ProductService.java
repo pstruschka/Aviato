@@ -15,7 +15,8 @@ public interface ProductService {
     public void saveProduct(Product product,User user);
     public List<Product> findAllProducts();
     public Product findProductById(Long id);
-    public void updateProductQuantity(Product product);
+    public Boolean updateProductQuantity(Product product,Long quantity);
+    public List<Product> findProductsInStock();
 
 
 
