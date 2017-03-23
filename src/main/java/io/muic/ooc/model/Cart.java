@@ -16,6 +16,7 @@ public class Cart {
     private Long cartId;
 
     @ManyToOne
+    @Column(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
