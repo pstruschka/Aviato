@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -41,15 +42,8 @@ public class Product {
     @JoinColumn(name = "User_id")
     private User user;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
+    @OneToMany(mappedBy = "product")
+    private Set<CartProduct> cartProducts;
 
 
     public void setProductName(String productName) {
@@ -102,5 +96,13 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(Set<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
     }
 }

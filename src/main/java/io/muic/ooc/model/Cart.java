@@ -5,6 +5,7 @@ package io.muic.ooc.model;
  */
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Cart {
@@ -14,14 +15,14 @@ public class Cart {
     @Column(name="cart_id")
     private Long cartId;
 
-//    @OneToMany
-//    @JoinTable(name = "cart_product" , joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
-//            inverseJoinColumns = @JoinColumn(name="product_id", referencedColumnName = "id", table = "product"))
-//    private HashMap<Product, Integer> cartItems;
-
-    //private BigDecimal cartTotalPrice;
-
+    @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartProduct> cartProducts;
+
+    private boolean orderConfirmed;
+
 
 
     public Long getCartId() { return cartId; }
@@ -34,34 +35,19 @@ public class Cart {
         this.user = user;
     }
 
-    //public HashMap<Product, Integer> getCartItems() { return cartItems; }
+    public Set<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
 
-    //public void setCartItems(HashMap<Product, Integer> cartItems) { this.cartItems = cartItems; }
+    public void setCartProducts(Set<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
+    }
 
-    //public BigDecimal getCartTotalPrice() { return cartTotalPrice; }
+    public boolean isOrderConfirmed() {
+        return orderConfirmed;
+    }
 
-    //public void setCartTotalPrice(BigDecimal cartTotalPrice) { this.cartTotalPrice = cartTotalPrice; }
-
-//    public void addCartItem(Product item) {
-//        if(cartItems.containsKey(item)){
-//            cartItems.put(item, cartItems.get(item)+1);
-//        } else {
-//            cartItems.put(item,1);
-//        }
-//        updateCartTotal();
-//    }
-//
-//    public void removeCartItem(Product item) {
-//        cartItems.remove(item);
-//        updateCartTotal();
-//    }
-
-//    private void updateCartTotal() {
-//        cartTotalPrice = BigDecimal.valueOf(0);
-//        for(Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-//            double quant = entry.getValue().doubleValue();
-//            double price = entry.getKey().getPrice().doubleValue();
-//            cartTotalPrice.add(BigDecimal.valueOf(quant*price));
-//        }
-//    }
+    public void setOrderConfirmed(boolean orderConfirmed) {
+        this.orderConfirmed = orderConfirmed;
+    }
 }
