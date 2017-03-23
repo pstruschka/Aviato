@@ -36,8 +36,6 @@ public class Product {
     private Integer rating;
 
 
-
-
     @ManyToOne()
     @JoinColumn(name = "User_id")
     private User user;
