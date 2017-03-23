@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -35,6 +36,9 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "User_id")
     private User user;
+
+    @OneToMany(mappedBy = "product")
+    private Set<CartProduct> cartProducts;
 
 
     public void setProductName(String productName) {
@@ -79,5 +83,13 @@ public class Product {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Set<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(Set<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
     }
 }

@@ -10,10 +10,9 @@ import java.util.List;
  * Created by joakimnilfjord on 3/11/2017 AD.
  */
 public interface ProductService {
-    //public Product findProductByProductName(String productname);
-    public List<Product> findProductsByUser(User user);
-    public void saveProduct(Product product,User user);
-    public Iterable<Product> findAllProducts();
+    List<Product> findProductsByUser(User user);
+    void saveProduct(Product product,User user);
+    Iterable<Product> findAllProducts();
 
 
 
