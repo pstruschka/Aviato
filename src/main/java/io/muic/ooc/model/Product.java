@@ -16,6 +16,7 @@ import java.util.Set;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
     @Column(name = "price")
     @NotNull(message = "*Please provide a Price for your product")
@@ -34,11 +35,11 @@ public class Product {
     private Integer rating;
 
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "User_id")
     private User user;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
     private Set<CartProduct> cartProducts;
 
 
