@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Cart</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/buyer/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+</form>
+<div class="page-header">
+    <h3 th:text="${user.getName()} + ' | My Cart'"></h3>
+</div>
+<div class="col-md-12 container-fluid">
+    <div class="container">
+        <table class="table">
+            <thead>
+            <th>Product Name</th>
+            <th>Quantity</th>
+
+            </thead>
+            <tbody>
+            <tr th:each="cp : ${cartProducts}">
+                <td th:text="${cp.getProduct()}"></td>
+                <td th:text="${cp.getQuantity()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+</html>

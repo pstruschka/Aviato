@@ -15,16 +15,14 @@ public class Cart {
     @Column(name="cart_id")
     private Long cartId;
 
-    @ManyToOne
-    @Column(name = "user_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart",cascade = {CascadeType.ALL})
     private Set<CartProduct> cartProducts;
 
     private boolean orderConfirmed;
-
-
 
     public Long getCartId() { return cartId; }
 
