@@ -31,9 +31,12 @@
                     <td th:text="${product.getPrice()}"></td>
                     <td th:text="${product.getQuantity()}"></td>
                     <td th:text="${product.getDescription()}"></td>
-                    <td><form th:object="${product}" th:action="@{/seller/edit_product}" method="get">
-                        <button class="btn btn-md btn-primary btn-block" name="edit"
-                                type="Submit">Edit</button>
+
+                    <td>
+                        <c:url var="${product}" value="@{/seller/edit_product}"/>
+                        <form th:object="${product}" th:action="@{/seller/edit_product}" method="POST">
+                            <input id="product" name="product" type="hidden" th:value="${product.getProductName()}"/>
+                            <button type="Submit" value="edit" class="btn btn-md btn-primary btn-block" name="edit" onClick="return confirm('sure?')">Edit</button>
                         </form>
                     </td>
 
