@@ -13,6 +13,9 @@
 <form th:action="@{/buyer/home}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
 </form>
+<form th:action="@{/buyer/viewproducts}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To View Products Page</button>
+</form>
 <div class="page-header">
     <h3 th:text="${user.getName()} + ' | My Cart'"></h3>
 </div>
@@ -26,12 +29,16 @@
             </thead>
             <tbody>
             <tr th:each="cp : ${cartProducts}">
-                <td th:text="${cp.getProduct()}"></td>
+                <td th:text="${cp.getProduct().getProductName()}"></td>
                 <td th:text="${cp.getQuantity()}"></td>
             </tr>
             </tbody>
         </table>
     </div>
+    <form th:action="@{/buyer/viewcart}" method="post">
+        <input type="hidden" th:value="${cart.getCartId()}" name="cart"/>
+        <button class="btn btn-md btn-warning btn-block" type="Submit">Confirm Cart</button>
+    </form>
 
 
 </body>

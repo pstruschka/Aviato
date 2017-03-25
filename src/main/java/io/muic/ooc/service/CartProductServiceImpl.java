@@ -48,12 +48,10 @@ public class CartProductServiceImpl implements  CartProductService {
         cartProductRepository.save(cartProduct);
         return cartProduct;
 
-
-
         }
 
     @Override
-    public Set<CartProduct> findCartProductByCart(Cart cart) {
+    public Set<CartProduct> findCartProductsByCart(Cart cart) {
         Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
         Set<CartProduct> cartProducts = new HashSet<>();
         for (CartProduct cp:  allCartProducts) {

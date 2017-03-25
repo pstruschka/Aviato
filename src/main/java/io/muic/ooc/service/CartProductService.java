@@ -11,6 +11,6 @@ import java.util.Set;
  */
 public interface CartProductService {
     public CartProduct updateCartProduct(Product product, Cart cart,Long quantity);
-    public Set<CartProduct> findCartProductByCart(Cart cart);
+    public Set<CartProduct> findCartProductsByCart(Cart cart);
 
 }

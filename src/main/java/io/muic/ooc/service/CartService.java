@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CartService {
     public Cart findCartWithUnconfirmedOrderByUserId(User user);
+    public boolean confirmOrderOfCart(Cart cart);
 
     
 }
