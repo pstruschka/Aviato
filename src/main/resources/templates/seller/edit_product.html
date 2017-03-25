@@ -21,6 +21,14 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="validation-message"></label>
+                        <input type="hidden" th:field="*{id}" th:placeholder="${product.getId()}"
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
                         <label th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" class="validation-message"></label>
                         <input type="text" th:field="*{productName}" th:placeholder="${product.getProductName()}"
                                class="form-control" />

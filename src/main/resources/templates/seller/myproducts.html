@@ -35,16 +35,16 @@
                     <td>
                         <c:url var="${product}" value="@{/seller/edit_product}"/>
                         <form th:object="${product}" th:action="@{/seller/edit_product}" method="POST">
-                            <input id="product" name="product" type="hidden" th:value="${product.getProductName()}"/>
-                            <button type="Submit" value="edit" class="btn btn-md btn-primary btn-block" name="edit" onClick="return confirm('sure?')">Edit</button>
+                            <input id="product" name="product" type="hidden" th:value="${product.getId()}"/>
+                            <button type="Submit" value="edit" class="btn btn-md btn-primary btn-block" name="edit" >Edit</button>
                         </form>
                     </td>
 
                     <td>
                         <c:url var="${product}" value="@{/seller/delete_product}"/>
                         <form th:object="${product}" th:action="@{/seller/delete_product}" method="POST">
-                            <input id="product" name="product" type="hidden" th:value="${product.getProductName()}"/>
-                            <button type="Submit" value="delete" class="btn btn-md btn-danger btn-block" name="delete" onClick="return confirm('sure?')">Delete</button>
+                            <input id="product" name="product" type="hidden" th:value="${product.getId()}"/>
+                            <button type="Submit" value="delete" class="btn btn-md btn-danger btn-block" name="delete" onClick="return confirm('sure?')" >Delete</button>
                         </form>
                     </td>
                 </tr>

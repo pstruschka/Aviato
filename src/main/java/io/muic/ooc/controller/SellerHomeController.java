@@ -66,28 +66,27 @@ public class SellerHomeController {
     }
 
     @RequestMapping(value="/seller/edit_product",method = RequestMethod.POST)
-    public ModelAndView editUserProduct(@RequestParam("product") String productName) {
+    public ModelAndView editUserProduct(@RequestParam("product") long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        Product product = productService.findProductByProductNameAndUser(productName,user);
+        Product product = productService.findProductByIdAndUser(id,user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/edit_product");
         modelAndView.addObject("user", user);
         modelAndView.addObject("product",product);
-        //productService.removeProductByProductNameAndUser(productName,user);
-
         return modelAndView;
     }
 
 
     @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
-    public ModelAndView deleteUserProduct(@RequestParam("product") String productName) {
+    public ModelAndView deleteUserProduct(@RequestParam("product") long id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
-        productService.removeProductByProductNameAndUser(productName,user);
+        Product product = productService.findProductByIdAndUser(id,user);
+        productService.removeProduct(product, user);
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
