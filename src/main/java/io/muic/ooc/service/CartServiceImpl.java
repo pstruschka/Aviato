@@ -6,8 +6,6 @@ package io.muic.ooc.service;
 
 
 import io.muic.ooc.model.Cart;
-import io.muic.ooc.model.CartProduct;
-import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,9 @@ public class CartServiceImpl implements CartService{
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    CartProductService cartProductService;
+
 
 
     @Override
@@ -38,16 +39,16 @@ public class CartServiceImpl implements CartService{
         return newCart;
     }
 
+    @Override
+    public boolean confirmOrderOfCart(Cart cart) {
+        if (cartProductService.findCartProductsByCart(cart).size() == 0) {
+            return false;
+        }
 
-
-
-
-
-
-
-
-
-
+        cart.setOrderConfirmed(true);
+        cartRepository.save(cart);
+        return true;
+    }
 
 
 }
