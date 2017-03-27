@@ -35,14 +35,13 @@ public class Product {
     private Integer rating;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+
+    @ManyToOne()
     @JoinColumn(name = "User_id")
     private User user;
 
     @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
     private Set<CartProduct> cartProducts;
-
-
 
 
 
@@ -90,6 +89,7 @@ public class Product {
         this.rating = rating;
     }
 
+
     public Set<CartProduct> getCartProducts() {
         return cartProducts;
     }
@@ -99,6 +99,6 @@ public class Product {
     }
 
     public Long getId() {
-        return id;
-    }
+        return id;}
+
 }
