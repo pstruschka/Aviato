@@ -19,9 +19,15 @@
                 type="Submit">Logout</button>
     </form>
 
+
     <form th:action="@{/buyer/viewproducts}" method="get">
         <button class="btn btn-md btn-default btn-block" name="View Products"
                 type="Submit">View Products</button>
+    </form>
+
+    <form th:action="@{/buyer/purchasehistory}" method="get">
+        <button class="btn btn-md btn-default btn-block" name="View Purchase History"
+                type="Submit">View Purchase History</button>
     </form>
 
     <div class="panel-group" style="margin-top:40px">
