@@ -21,7 +21,7 @@ public class Product {
     @Column(name = "price")
     @NotNull(message = "*Please provide a Price for your product")
     @DecimalMin(value = "0",message = "*Please provide a positive value for Price for your product")
-    private BigDecimal price;
+    private Long price;
     @Column(name = "product_name")
     @NotEmpty(message = "*Please provide a Name for your product")
     private String productName;
@@ -70,9 +70,9 @@ public class Product {
         return description;
     }
 
-    public BigDecimal getPrice() { return price; }
+    public Long getPrice() { return price; }
 
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public void setPrice(Long price) { this.price = price; }
 
     public User getUser() {
         return user;

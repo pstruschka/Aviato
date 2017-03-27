@@ -34,15 +34,21 @@ public class ViewCartController {
 
     @RequestMapping(value="/buyer/viewcart",method = RequestMethod.GET)
     public ModelAndView viewCart(@RequestParam("cart") Cart cart ){
+        Long totalPrice;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/buyer/viewcart");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
+        totalPrice = cartProductService.getTotalPrice(cartProducts);
+
+
+        modelAndView.addObject("totalPrice",totalPrice);
         modelAndView.addObject("cart",cart);
         modelAndView.addObject("cartProducts",cartProducts);
         modelAndView.addObject("user", user);
         modelAndView.addObject("cartProducts",cartProducts);
+
         return modelAndView;
     }
     @RequestMapping(value = "/buyer/viewcart",method = RequestMethod.POST)

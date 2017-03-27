@@ -55,7 +55,7 @@ public class ViewItemsController {
         Product product = productService.findProductById(productId);
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
         cartProductService.updateCartProduct(product,cart,quantity);
-        productService.updateProductQuantity(product,quantity);
+       // productService.updateProductQuantity(product,quantity);
         return viewUserProducts();
 
     }

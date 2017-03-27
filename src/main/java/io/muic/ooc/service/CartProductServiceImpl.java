@@ -8,6 +8,7 @@ import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,19 @@ public class CartProductServiceImpl implements  CartProductService {
             }
         }
         return cartProducts;
+    }
+
+    @Override
+    public Long getTotalPrice(Set<CartProduct> cartProductSet) {
+       Long totalPrice = 0L;
+        if (cartProductSet != null) {
+            for (CartProduct cartProduct: cartProductSet) {
+                totalPrice +=  cartProduct.getQuantity() * cartProduct.getProduct().getPrice();
+
+            }
+        }
+        return totalPrice;
+
     }
 
 }
