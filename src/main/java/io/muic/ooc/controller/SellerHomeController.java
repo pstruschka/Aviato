@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +51,7 @@ public class SellerHomeController {
         return modelAndView;
     }
 
+
     @RequestMapping(value="/seller/myproducts",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -65,9 +65,34 @@ public class SellerHomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/seller/edit_product",method = RequestMethod.GET)
-    @ResponseBody
-    public String editUserProduct() {
-        return "edit product";
+    @RequestMapping(value="/seller/edit_product",method = RequestMethod.POST)
+    public ModelAndView editUserProduct(@RequestParam("product") long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        Product product = productService.findProductByIdAndUser(id,user);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/seller/edit_product");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("product",product);
+        return modelAndView;
     }
+
+
+    @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
+    public ModelAndView deleteUserProduct(@RequestParam("product") long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/seller/myproducts");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        User user = userService.findUserByUsername(auth.getName());
+        Product product = productService.findProductByIdAndUser(id,user);
+        productService.removeProduct(product, user);
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("products", userProducts);
+        return modelAndView;
+    }
+
+
+
 }

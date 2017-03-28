@@ -25,6 +25,29 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public void removeProduct(Product product,User user) {
+        product.setRating(0);
+        product.setUser(user);
+        productRepository.delete(product);
+    }
+
+    @Override
+    public Product findProductByIdAndUser(long id,User user) {
+        List<Product> products = productRepository.findProductsByUser(user);
+        Product searchedProduct = null;
+        for (Product product : products) {
+            if (product.getId()==id) {
+                searchedProduct = product;
+            }
+            else{
+                System.out.println("ERROR: Couldn't find product with id "+ id + " for user " + user.getUsername()+ "." );
+            }
+        }
+        return searchedProduct;
+    }
+
+
+    @Override
     public List<Product> findProductsByUser(User user){
         List<Product> products = productRepository.findProductsByUser(user);
         return products;

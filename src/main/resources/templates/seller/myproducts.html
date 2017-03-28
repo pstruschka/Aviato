@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
 
 <head>
     <title>My Products</title>
@@ -10,6 +10,9 @@
     <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<form th:action="@{/seller/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+</form>
 <div class="page-header">
     <h3 th:text="${user.getName()} + ' | My Products'"></h3>
 </div>
@@ -28,15 +31,21 @@
                     <td th:text="${product.getPrice()}"></td>
                     <td th:text="${product.getQuantity()}"></td>
                     <td th:text="${product.getDescription()}"></td>
-                    <td><form th:object="${product}" th:action="@{/seller/edit_product}" method="get">
-                        <button class="btn btn-md btn-primary btn-block" name="edit"
-                                type="Submit">Edit</button>
+
+                    <td>
+                        <c:url var="${product}" value="@{/seller/edit_product}"/>
+                        <form th:object="${product}" th:action="@{/seller/edit_product}" method="POST">
+                            <input id="product" name="product" type="hidden" th:value="${product.getId()}"/>
+                            <button type="Submit" value="edit" class="btn btn-md btn-primary btn-block" name="edit" >Edit</button>
                         </form>
                     </td>
-                    <td><form th:object="${product}" th:action="@{/seller/delete_product}" method="get">
-                        <button class="btn btn-md btn-danger btn-block" name="edit"
-                                type="Submit">Delete</button>
-                    </form>
+
+                    <td>
+                        <c:url var="${product}" value="@{/seller/delete_product}"/>
+                        <form th:object="${product}" th:action="@{/seller/delete_product}" method="POST">
+                            <input id="product" name="product" type="hidden" th:value="${product.getId()}"/>
+                            <button type="Submit" value="delete" class="btn btn-md btn-danger btn-block" name="delete" onClick="return confirm('sure?')" >Delete</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>

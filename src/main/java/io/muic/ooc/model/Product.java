@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -35,6 +37,13 @@ public class Product {
     @JoinColumn(name = "User_id")
     private User user;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setProductName(String productName) {
         this.productName = productName;
