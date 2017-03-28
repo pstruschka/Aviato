@@ -18,38 +18,28 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void saveProduct(Product product,User user) {
+        product.setSelling(true);
         product.setRating(0);
         product.setUser(user);
         productRepository.save(product);
     }
 
     @Override
-    public void removeProduct(Product product,User user) {
-        product.setRating(0);
-        product.setUser(user);
-        productRepository.delete(product);
+    public void removeProduct(Product product) {
+        product.setSelling(false);
+        productRepository.save(product);
     }
-
-    @Override
-    public Product findProductByIdAndUser(Long id,User user) {
-        List<Product> products = productRepository.findProductsByUser(user);
-        Product searchedProduct = null;
-        for (Product product : products) {
-            if (product.getId()==id) {
-                searchedProduct = product;
-            }
-            else{
-                System.out.println("ERROR: Couldn't find product with id "+ id + " for user " + user.getUsername()+ "." );
-            }
-        }
-        return searchedProduct;
-    }
-
 
     @Override
     public List<Product> findProductsByUser(User user){
         List<Product> products = productRepository.findProductsByUser(user);
-        return products;
+        List<Product> sellingProducts  = new ArrayList<>();
+        for (Product p: products) {
+            if (p.getSelling() == true) {
+                sellingProducts.add(p);
+            }
+        }
+        return sellingProducts;
     }
 
     public List<Product> findAllProducts() {
@@ -62,7 +52,7 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> findProductsInStock() {
         List<Product> allProducts = new ArrayList<>();
         for (Product p: productRepository.findAll()) {
-            if (p.getQuantity() > 0) { allProducts.add(p);}
+            if (p.getQuantity() > 0 && p.getSelling() == true) { allProducts.add(p);}
 
         }
         return allProducts;

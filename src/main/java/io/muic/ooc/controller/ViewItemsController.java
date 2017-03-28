@@ -55,9 +55,14 @@ public class ViewItemsController {
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
-        cartProductService.updateCartProduct(product,cart,quantity);
-       // productService.updateProductQuantity(product,quantity);
-        return viewUserProducts();
-
+        cartProductService.updateCartProduct(product, cart, quantity);
+        // productService.updateProductQuantity(product,quantity);
+        ModelAndView modelAndView = new ModelAndView();
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
+        modelAndView.addObject("products", userProducts);
+        modelAndView.addObject("cart",cart.getCartId());
+        modelAndView.addObject("user",user);
+        modelAndView.setViewName("/buyer/viewproducts");
+        return modelAndView;
     }
 }

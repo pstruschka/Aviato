@@ -71,14 +71,8 @@ public class CartServiceImpl implements CartService{
             //Change this...
             if (selectedQuantiry <= product.getQuantity()) {
                 productService.updateProductQuantity(product,selectedQuantiry);
-
             }
-
-
-
         }
-
-
         cart.setOrderConfirmed(true);
         cartRepository.save(cart);
         return true;

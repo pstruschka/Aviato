@@ -39,8 +39,8 @@ public class EditProductController {
         if (!bindingResult.hasErrors()) {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User user = userService.findUserByUsername(auth.getName());
-            Product originalProduct = productService.findProductByIdAndUser(product.getId(),user);
-            productService.removeProduct(originalProduct, user);
+            //Product originalProduct = productService.findProductByIdAndUser(product.getId(),user);
+            //productService.removeProduct(originalProduct, user);
             productService.saveProduct(product,user);
             modelAndView.addObject("successMessage", "Product edited successfully");
             //modelAndView.addObject("product", new Product());

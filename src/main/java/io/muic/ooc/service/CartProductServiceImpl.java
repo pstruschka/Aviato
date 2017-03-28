@@ -21,7 +21,6 @@ public class CartProductServiceImpl implements  CartProductService {
     @Autowired
     CartProductRepository cartProductRepository;
 
-
     @Override
     public CartProduct updateCartProduct(Product product, Cart cart,Long quantity) {
         Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();

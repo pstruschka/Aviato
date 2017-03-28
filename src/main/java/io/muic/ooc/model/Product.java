@@ -34,6 +34,10 @@ public class Product {
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
+
+
+
+    private Boolean isSelling;
     private Integer rating;
 
 
@@ -106,5 +110,13 @@ public class Product {
 
     public void setCartProducts(Set<CartProduct> cartProducts) {
         this.cartProducts = cartProducts;
+    }
+
+    public Boolean getSelling() {
+        return isSelling;
+    }
+
+    public void setSelling(Boolean selling) {
+        isSelling = selling;
     }
 }
