@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -16,6 +18,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
     @Column(name = "price")
     @NotNull(message = "*Please provide a Price for your product")
@@ -25,25 +28,26 @@ public class Product {
     @NotEmpty(message = "*Please provide a Name for your product")
     private String productName;
     @Column(name = "quantity")
-    @DecimalMin(value = "1",message = "*Please provide a positive value for Quantity for your product")
+    @DecimalMin(value = "0",message = "*Please provide a positive value for Quantity for your product")
     @NotNull(message = "*Please provide a quantity for your product")
     private Long quantity;
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
+
+
+
+    private Boolean isSelling;
     private Integer rating;
 
-    @ManyToOne()
+
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "User_id")
     private User user;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
+    private Set<CartProduct> cartProducts;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setProductName(String productName) {
         this.productName = productName;
@@ -57,16 +61,13 @@ public class Product {
         this.quantity = quantity;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-
     public String getProductName() {
         return productName;
     }
-
 
     public String getDescription() {
         return description;
@@ -90,5 +91,29 @@ public class Product {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+    public Long getId() {
+        return id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<CartProduct> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(Set<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
+    }
+
+    public Boolean getSelling() {
+        return isSelling;
+    }
+
+    public void setSelling(Boolean selling) {
+        isSelling = selling;
     }
 }

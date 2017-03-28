@@ -10,13 +10,20 @@ import java.util.List;
  * Created by joakimnilfjord on 3/11/2017 AD.
  */
 public interface ProductService {
+
+    List<Product> findProductsByUser(User user);
+    void saveProduct(Product product,User user);
+    void removeProduct(Product product);
+    List<Product> findAllProducts();
+    Product findProductById(Long id);
+    Boolean updateProductQuantity(Product product,Long quantity);
+    List<Product> findProductsInStock();
+
     //public Product findProductByProductName(String productname);
-    public List<Product> findProductsByUser(User user);
-    public void saveProduct(Product product,User user);
-    public void removeProduct(Product product,User user);
-    public Product findProductByIdAndUser(long id, User user);
-    public Iterable<Product> findAllProducts();
-
-
-
+//    public List<Product> findProductsByUser(User user);
+//    public void saveProduct(Product product,User user);
+//    public List<Product> findAllProducts();
+//    public Product findProductById(Long id);
+//    public Boolean updateProductQuantity(Product product,Long quantity);
+//    public List<Product> findProductsInStock();
 }
