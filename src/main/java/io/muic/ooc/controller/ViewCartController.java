@@ -66,4 +66,25 @@ public class ViewCartController {
         modelAndView.setViewName("/buyer/home");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/buyer/payment",method = RequestMethod.GET)
+    public ModelAndView checkout(@RequestParam("cart") Cart cart){
+        Long totalPrice;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
+        totalPrice = cartProductService.getTotalPrice(cartProducts);
+        modelAndView.addObject("totalPrice",totalPrice);
+        modelAndView.addObject("user",user);
+        modelAndView.addObject("cart",cart);
+        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
+        if (!canBeConfirmed) {
+            modelAndView.addObject("cart",cart);
+            modelAndView.setViewName("/buyer/home");
+            return modelAndView;
+        }
+        modelAndView.setViewName("/buyer/payment");
+        return modelAndView;
+    }
 }
