@@ -62,7 +62,7 @@ public class SellerHomeController {
     public ModelAndView editUserProduct(@RequestParam("product") long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        Product product = productService.findProductByIdAndUser(id,user);
+        Product product = productService.findProductById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/edit_product");
         modelAndView.addObject("user", user);

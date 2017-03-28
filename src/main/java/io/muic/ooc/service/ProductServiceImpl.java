@@ -53,7 +53,6 @@ public class ProductServiceImpl implements ProductService{
         List<Product> allProducts = new ArrayList<>();
         for (Product p: productRepository.findAll()) {
             if (p.getQuantity() > 0 && p.getSelling() == true) { allProducts.add(p);}
-
         }
         return allProducts;
     }

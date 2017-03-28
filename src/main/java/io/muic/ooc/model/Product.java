@@ -49,9 +49,6 @@ public class Product {
     private Set<CartProduct> cartProducts;
 
 
-
-
-
     public void setProductName(String productName) {
         this.productName = productName;
     }

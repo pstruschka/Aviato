@@ -30,6 +30,7 @@ public class PurchaseHistoryController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         //Set<Cart> cartHashSet = cartService.findCartsWithConfrimedOrderByUserId(user);
+
         ModelAndView modelAndView = new ModelAndView();
        // modelAndView.addObject("carts",cartHashSet);
         modelAndView.setViewName("/buyer/purchasehistory");
