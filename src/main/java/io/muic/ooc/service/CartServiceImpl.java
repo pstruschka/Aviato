@@ -29,8 +29,6 @@ public class CartServiceImpl implements CartService{
     @Autowired
     ProductService productService;
 
-
-
     @Override
     public Cart findCartWithUnconfirmedOrderByUserId(User user) {
         Cart newCart= new Cart();

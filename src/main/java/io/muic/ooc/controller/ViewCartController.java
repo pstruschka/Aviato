@@ -45,8 +45,6 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
         totalPrice = cartProductService.getTotalPrice(cartProducts);
-
-
         modelAndView.addObject("totalPrice",totalPrice);
         modelAndView.addObject("cart",cart);
         modelAndView.addObject("cartProducts",cartProducts);
@@ -88,7 +86,6 @@ public class ViewCartController {
 
     @RequestMapping(value = "/buyer/delete",method = RequestMethod.POST)
     public ModelAndView delete(@RequestParam("cart_product_id") Long cartProductId){
-        System.out.println("here DELETE METHOD");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();

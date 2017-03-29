@@ -4,6 +4,7 @@ import io.muic.ooc.model.Cart;
 import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.repository.CartProductRepository;
+import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ import java.util.Set;
 public class CartProductServiceImpl implements  CartProductService {
     @Autowired
     CartProductRepository cartProductRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     @Override
     public CartProduct updateCartProduct(Product product, Cart cart,Long quantity) {
@@ -53,7 +57,11 @@ public class CartProductServiceImpl implements  CartProductService {
         Set<CartProduct> cartProducts = new HashSet<>();
         for (CartProduct cp:  allCartProducts) {
             if (cp.getCart().equals(cart)) {
-                cartProducts.add(cp);
+                if (cp.getProduct().getSelling()){
+                    cartProducts.add(cp);
+                }else {
+                    cartProductRepository.delete(cp);
+                }
             }
         }
         return cartProducts;

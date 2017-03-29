@@ -41,10 +41,9 @@
                     </td>
 
                     <td>
-                        <c:url var="${product}" value="@{/seller/delete_product}"/>
-                        <form th:object="${product}" th:action="@{/seller/delete_product}" method="POST">
+                        <form th:action="@{/seller/delete_product}" method="POST">
                             <input id="product" name="product" type="hidden" th:value="${product.getId()}"/>
-                            <button type="Submit" value="delete" class="btn btn-md btn-danger btn-block" name="delete" onClick="return confirm('sure?')" >Delete</button>
+                            <button type="Submit" class="btn btn-md btn-danger btn-block" onClick="return confirm('sure?')" >Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -18,6 +18,7 @@ public interface ProductService {
     Product findProductById(Long id);
     Boolean updateProductQuantity(Product product,Long quantity,String type);
     List<Product> findProductsInStock();
+    public void notSelling(Product product);
 
     //public Product findProductByProductName(String productname);
 //    public List<Product> findProductsByUser(User user);

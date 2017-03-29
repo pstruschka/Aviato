@@ -24,6 +24,11 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
     }
 
+    public void notSelling(Product product) {
+        product.setSelling(false);
+        productRepository.save(product);
+    }
+
     @Override
     public void removeProduct(Product product) {
         product.setSelling(false);
