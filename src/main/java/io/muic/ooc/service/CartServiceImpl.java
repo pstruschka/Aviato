@@ -65,14 +65,7 @@ public class CartServiceImpl implements CartService{
         if ( cartProductSet == null || cartProductSet.size()== 0) {
             return false;
         }
-        for (CartProduct cartProduct:cartProductSet) {
-            Long selectedQuantiry = cartProduct.getQuantity();
-            Product product = cartProduct.getProduct();
-            //Change this...
-            if (selectedQuantiry <= product.getQuantity()) {
-                productService.updateProductQuantity(product,selectedQuantiry);
-            }
-        }
+
         cart.setOrderConfirmed(true);
         cartRepository.save(cart);
         return true;

@@ -78,12 +78,12 @@ public class ViewCartController {
         modelAndView.addObject("totalPrice",totalPrice);
         modelAndView.addObject("user",user);
         modelAndView.addObject("cart",cart);
-        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
-        if (!canBeConfirmed) {
-            modelAndView.addObject("cart",cart);
-            modelAndView.setViewName("/buyer/home");
-            return modelAndView;
-        }
+//        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
+//        if (!canBeConfirmed) {
+//            modelAndView.addObject("cart",cart);
+//            modelAndView.setViewName("/buyer/home");
+//            return modelAndView;
+//        }
         modelAndView.setViewName("/buyer/payment");
         return modelAndView;
     }

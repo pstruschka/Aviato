@@ -11,14 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
-/**
- * Created by joakimnilfjord on 3/13/2017 AD.
- */
 @Controller
 public class ViewItemsController {
 
@@ -33,7 +31,7 @@ public class ViewItemsController {
     @Autowired
     CartService cartService;
 
-    @RequestMapping(value="/buyer/viewproducts",method = RequestMethod.GET)
+    @RequestMapping(value="/buyer/products",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/buyer/viewproducts");
@@ -47,22 +45,33 @@ public class ViewItemsController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/buyer/buy",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/products",method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView buyProducts(@ModelAttribute("product") Long productId,
-                                    @RequestParam("quantity") Long quantity) {
+                                    @RequestParam("quantity") Long quantity, Model model) {
+        ModelAndView modelAndView = new ModelAndView("/buyer/viewproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
-        cartProductService.updateCartProduct(product, cart, quantity);
+        if (quantity > product.getQuantity()){
+            modelAndView.addObject("errorProduct", product.getId());
+            modelAndView.addObject("errorMessage","Not enough in stock!");
+        }else if (quantity <= 0){
+            modelAndView.addObject("errorProduct", product.getId());
+            modelAndView.addObject("errorMessage","Put a positive value.");
+        }
+        else{
+            modelAndView.addObject("successProduct", product.getId());
+            modelAndView.addObject("successMessage","Added " + quantity.toString() + " to Cart");
+            productService.updateProductQuantity(product,quantity);
+            cartProductService.updateCartProduct(product, cart, quantity);
+        }
         // productService.updateProductQuantity(product,quantity);
-        ModelAndView modelAndView = new ModelAndView();
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
         modelAndView.addObject("products", userProducts);
         modelAndView.addObject("cart",cart.getCartId());
         modelAndView.addObject("user",user);
-        modelAndView.setViewName("/buyer/viewproducts");
         return modelAndView;
     }
 }
