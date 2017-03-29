@@ -15,5 +15,5 @@ import java.util.Set;
  */
 @Repository("cartRepository")
 public interface CartRepository extends CrudRepository<Cart, Long>{
-    List<Cart> findByUserId(User user);
+    List<Cart> findByUserId(User user_id);
 }

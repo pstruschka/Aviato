@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <h2>helloo !!!</h2>
+    <title>My Purchase history</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<form th:action="@{/buyer/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+</form>
+<form th:action="@{/buyer/products}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To View Products Page</button>
+</form>
+<div class="page-header">
+    <h3>My Purchase history</h3>
+</div>
+<div class="col-md-12 container-fluid">
+    <div class="container">
+        <ul th:each="cart : ${carts}">
+            <label>Cart</label>
+            <li th:each="product : ${cart}">
+                <span th:text="${product.getProduct().getProductName()}"></span>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

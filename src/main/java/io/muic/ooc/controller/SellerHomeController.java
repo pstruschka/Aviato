@@ -72,17 +72,18 @@ public class SellerHomeController {
 
 
     @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
-    public ModelAndView deleteUserProduct(@RequestParam("product") long id) {
+    public ModelAndView deleteUserProduct(@RequestParam("product") Long productId) {
+        System.out.println("HERE METHOD DELETE YO");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
-        Product product = productService.findProductById(id);
-        productService.removeProduct(product);
-        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+        Product product = productService.findProductById(productId);
+        productService.notSelling(product);
+//        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
         modelAndView.addObject("user", user);
-        modelAndView.addObject("products", userProducts);
+//        modelAndView.addObject("products", userProducts);
+        modelAndView.setViewName("redirect:/seller/myproducts");
         return modelAndView;
     }
 

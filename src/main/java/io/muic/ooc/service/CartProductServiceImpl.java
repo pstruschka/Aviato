@@ -8,9 +8,8 @@ import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,6 +19,9 @@ import java.util.Set;
 public class CartProductServiceImpl implements  CartProductService {
     @Autowired
     CartProductRepository cartProductRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     @Override
     public CartProduct updateCartProduct(Product product, Cart cart,Long quantity) {
@@ -56,7 +58,11 @@ public class CartProductServiceImpl implements  CartProductService {
         Set<CartProduct> cartProducts = new HashSet<>();
         for (CartProduct cp:  allCartProducts) {
             if (cp.getCart().equals(cart)) {
-                cartProducts.add(cp);
+                if (cp.getProduct().getSelling()){
+                    cartProducts.add(cp);
+                }else {
+                    cartProductRepository.delete(cp);
+                }
             }
         }
         return cartProducts;
@@ -74,6 +80,31 @@ public class CartProductServiceImpl implements  CartProductService {
         return totalPrice;
 
     }
+
+    @Override
+    public CartProduct findCartProductsById(Long cartProductId) {
+        return cartProductRepository.findOne(cartProductId);
+
+    }
+
+    @Override
+    public boolean remove(Long cartProductId){
+        cartProductRepository.delete(cartProductId);
+        return true;
+    }
+
+    @Override
+    public Set<CartProduct> findCartProducts(Cart cart) {
+        Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
+        Set<CartProduct> cartProducts = new HashSet<>();
+        for (CartProduct cp:  allCartProducts) {
+            if (cp.getCart().equals(cart)) {
+                cartProducts.add(cp);
+            }
+        }
+        return cartProducts;
+    }
+
 
 }
 

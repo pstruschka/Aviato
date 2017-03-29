@@ -13,6 +13,7 @@ import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,8 +29,6 @@ public class CartServiceImpl implements CartService{
 
     @Autowired
     ProductService productService;
-
-
 
     @Override
     public Cart findCartWithUnconfirmedOrderByUserId(User user) {
@@ -48,10 +47,10 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public Set<Cart> findCartsWithConfrimedOrderByUserId(User user) {
-        List<Cart> cartsByUser = cartRepository.findByUserId(user);
+        Iterable<Cart> carts = cartRepository.findAll();
         Set<Cart> cartSet = new HashSet<>();
-        for (Cart cart: cartsByUser) {
-            if (cart.isOrderConfirmed()) {
+        for (Cart cart: carts) {
+            if (cart.isOrderConfirmed() && cart.getUser()==user) {
                 cartSet.add(cart);
             }
         }
@@ -69,6 +68,15 @@ public class CartServiceImpl implements CartService{
         cart.setOrderConfirmed(true);
         cartRepository.save(cart);
         return true;
+    }
+
+    @Override
+    public Set<Set<CartProduct>> getAllCartProducts(Set<Cart> carts){
+        Set<Set<CartProduct>> set = new HashSet<>();
+        for (Cart c : carts){
+            set.add(cartProductService.findCartProducts(c));
+        }
+        return set;
     }
 
 

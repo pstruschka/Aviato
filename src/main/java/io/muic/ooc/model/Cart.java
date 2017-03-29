@@ -15,11 +15,11 @@ public class Cart {
     @Column(name="cart_id")
     private Long cartId;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "cart",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "cart")
     private Set<CartProduct> cartProducts;
 
     private boolean orderConfirmed;

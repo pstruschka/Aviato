@@ -24,6 +24,11 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
     }
 
+    public void notSelling(Product product) {
+        product.setSelling(false);
+        productRepository.save(product);
+    }
+
     @Override
     public void removeProduct(Product product) {
         product.setSelling(false);
@@ -57,13 +62,17 @@ public class ProductServiceImpl implements ProductService{
         return allProducts;
     }
 
-    public Boolean updateProductQuantity(Product product,Long selectedQuantity) {
+    public Boolean updateProductQuantity(Product product,Long selectedQuantity,String type) {
         if (selectedQuantity <= product.getQuantity()) {
-        Long quantity = product.getQuantity();
-        quantity -=selectedQuantity;
-        product.setQuantity(quantity);
-        productRepository.save(product);
-        return true;
+            Long quantity = product.getQuantity();
+            if (type.equals("add")){
+                quantity +=selectedQuantity;
+            }else if (type.equals("subtract")){
+                quantity -=selectedQuantity;
+            }
+            product.setQuantity(quantity);
+            productRepository.save(product);
+            return true;
         }
         else {
             return false;
