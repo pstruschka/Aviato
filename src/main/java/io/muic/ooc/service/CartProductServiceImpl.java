@@ -8,6 +8,7 @@ import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,5 +92,19 @@ public class CartProductServiceImpl implements  CartProductService {
         cartProductRepository.delete(cartProductId);
         return true;
     }
+
+    @Override
+    public Set<CartProduct> findCartProducts(Cart cart) {
+        Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
+        Set<CartProduct> cartProducts = new HashSet<>();
+        for (CartProduct cp:  allCartProducts) {
+            if (cp.getCart().equals(cart)) {
+                cartProducts.add(cp);
+            }
+        }
+        return cartProducts;
+    }
+
+
 }
 
