@@ -40,8 +40,14 @@
 
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{role}"
-								   placeholder="Role" class="form-control" />
+							<label>Admin</label>
+							<input type="radio" th:field="*{role}" th:value="1" />
+							<label>Buyer</label>
+							<input type="radio" th:field="*{role}" th:value="2" />
+							<label>Seller</label>
+							<input type="radio" th:field="*{role}" th:value="3" />
+							<!--<input type="text" th:field="*{role}"-->
+								   <!--placeholder="Role" class="form-control" />-->
 						</div>
 					</div>
 

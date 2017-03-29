@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="col-md-12 container-fluid">
+    <div class="container">
+        <h2 th:text="'Total Price:' + ${totalPrice}"></h2>
+        <form th:action="@{/buyer/viewcart}" method="post">
+            <input type="hidden" th:value="${cart.getCartId()}" name="cart"/>
+            <input type="radio" name="type" value="cod"> Cash on Delivery<br>
+            <input type="radio" name="type" value="cc"> Credit Card/Debit Card
+            <button class="btn btn-md btn-warning btn-block" type="Submit">Confirm</button>
+        </form>
+
+        <p><b>Note:</b> CC doesn't work for now</p>
+
+    </div>
+</div>
+
+
+</body>
+</html>
