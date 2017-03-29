@@ -16,7 +16,7 @@
         <h2 th:text="'Total Price:' + ${totalPrice}"></h2>
         <form th:action="@{/buyer/viewcart}" method="post">
             <input type="hidden" th:value="${cart.getCartId()}" name="cart"/>
-            <input type="radio" name="type" value="cod"> Cash on Delivery<br>
+            <input type="radio" name="type" value="cod" checked="checked"> Cash on Delivery<br>
             <input type="radio" name="type" value="cc"> Credit Card/Debit Card
             <button class="btn btn-md btn-warning btn-block" type="Submit">Confirm</button>
         </form>
