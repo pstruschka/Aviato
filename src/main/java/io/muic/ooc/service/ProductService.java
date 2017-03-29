@@ -16,7 +16,7 @@ public interface ProductService {
     void removeProduct(Product product);
     List<Product> findAllProducts();
     Product findProductById(Long id);
-    Boolean updateProductQuantity(Product product,Long quantity);
+    Boolean updateProductQuantity(Product product,Long quantity,String type);
     List<Product> findProductsInStock();
 
     //public Product findProductByProductName(String productname);

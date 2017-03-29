@@ -35,6 +35,13 @@
                 <td th:text="${cp.getProduct().getPrice()}"></td>
                 <td th:text="${cp.getQuantity()}"></td>
                 <td th:text="${cp.getProduct().getUser().getName()}"></td>
+                <td>
+                    <form th:action="@{/buyer/delete}" method="post">
+                        <input type="hidden" th:value="${cp.getCartProductId()}" name="cart_product_id"/>
+                        <button class="btn btn-md btn-danger btn-block" name="remove"
+                                type="Submit">Remove</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

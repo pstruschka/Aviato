@@ -8,18 +8,21 @@ import java.io.Serializable;
 public class CartProduct implements Serializable{
 
 
+    public Long getCartProductId() {
+        return cartProductId;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="cart_product_id")
     Long cartProductId;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     @JoinColumn(name = "product_id")
     private Product product;
 

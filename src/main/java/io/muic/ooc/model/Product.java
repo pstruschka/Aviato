@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -41,11 +40,11 @@ public class Product {
     private Integer rating;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     @JoinColumn(name = "User_id")
     private User user;
 
-    @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "product")
     private Set<CartProduct> cartProducts;
 
 

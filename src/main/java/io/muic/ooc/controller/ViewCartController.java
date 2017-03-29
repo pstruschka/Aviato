@@ -5,6 +5,7 @@ import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.CartProductService;
 import io.muic.ooc.service.CartService;
+import io.muic.ooc.service.ProductService;
 import io.muic.ooc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -31,6 +32,9 @@ public class ViewCartController {
 
     @Autowired
     CartService cartService;
+
+    @Autowired
+    ProductService productService;
 
     @RequestMapping(value="/buyer/viewcart",method = RequestMethod.GET)
     public ModelAndView viewCart(@RequestParam("cart") Cart cart ){
@@ -78,13 +82,24 @@ public class ViewCartController {
         modelAndView.addObject("totalPrice",totalPrice);
         modelAndView.addObject("user",user);
         modelAndView.addObject("cart",cart);
-//        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
-//        if (!canBeConfirmed) {
-//            modelAndView.addObject("cart",cart);
-//            modelAndView.setViewName("/buyer/home");
-//            return modelAndView;
-//        }
         modelAndView.setViewName("/buyer/payment");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/buyer/delete",method = RequestMethod.POST)
+    public ModelAndView delete(@RequestParam("cart_product_id") Long cartProductId){
+        System.out.println("here DELETE METHOD");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        CartProduct cartProduct =  cartProductService.findCartProductsById(cartProductId);
+        productService.updateProductQuantity(cartProduct.getProduct(),cartProduct.getQuantity(),"add");
+        cartProductService.remove(cartProductId);
+        Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
+        modelAndView.addObject("user",user);
+        modelAndView.addObject("cart",cart);
+        modelAndView.setViewName("/buyer/viewcart");
+        return modelAndView;
+
     }
 }

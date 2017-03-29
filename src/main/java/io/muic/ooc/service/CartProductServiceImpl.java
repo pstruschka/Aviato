@@ -4,13 +4,10 @@ import io.muic.ooc.model.Cart;
 import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.repository.CartProductRepository;
-import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -75,5 +72,16 @@ public class CartProductServiceImpl implements  CartProductService {
 
     }
 
+    @Override
+    public CartProduct findCartProductsById(Long cartProductId) {
+        return cartProductRepository.findOne(cartProductId);
+
+    }
+
+    @Override
+    public boolean remove(Long cartProductId){
+        cartProductRepository.delete(cartProductId);
+        return true;
+    }
 }
 
