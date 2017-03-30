@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The 404 Error</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="col-md-12 container-fluid">
+    <div class="container">
+        <!--/*@thymesVar id="message" type="java"*/-->
+        <h2 th:text="${message}"></h2>
+        <form th:action="@{/default}" method="post">
+            <button class="btn btn-md btn-warning btn-block" type="Submit">Return to home page</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

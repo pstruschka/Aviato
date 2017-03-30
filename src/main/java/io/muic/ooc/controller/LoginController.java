@@ -12,12 +12,10 @@ import io.muic.ooc.service.UserService;
 
 @Controller
 public class LoginController {
-	@Autowired
-	private UserService userService;
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser" ) {
 			modelAndView.setViewName("login");

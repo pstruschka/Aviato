@@ -18,7 +18,7 @@ public class AdminController {
 
     @RequestMapping(value="/admin/home", method = RequestMethod.GET)
 	public ModelAndView home(){
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		//System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());

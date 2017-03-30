@@ -23,7 +23,7 @@ public class SellerHomeController {
 
     @RequestMapping(value="/seller/home", method = RequestMethod.GET)
     public ModelAndView sellerHome(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        //System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
@@ -50,7 +50,7 @@ public class SellerHomeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
+        //System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
         modelAndView.addObject("user", user);
