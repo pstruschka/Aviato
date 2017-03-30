@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ViewItemsController {
@@ -42,6 +43,22 @@ public class ViewItemsController {
         modelAndView.addObject("cart",cart.getCartId());
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/buyer/searchproducts",method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView searchProducts(@RequestParam("search") String search) {
+        ModelAndView modelAndView = new ModelAndView("/buyer/searchproducts");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        System.out.println("---------------");
+        System.out.println(search);
+        System.out.println("---------------");
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByKeyword(search));
+        modelAndView.addObject("products", userProducts);
+        modelAndView.addObject("user",user);
+        modelAndView.addObject("search",search);
         return modelAndView;
     }
 

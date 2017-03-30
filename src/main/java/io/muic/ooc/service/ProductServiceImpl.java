@@ -83,4 +83,15 @@ public class ProductServiceImpl implements ProductService{
         Product product = productRepository.findOne(id);
         return product;
     }
+
+    public List<Product> findProductsByKeyword(String keyword) {
+        List<Product> productsInStock = findProductsInStock();
+        List<Product> productsThatMatchKeyword = new ArrayList<>();
+        for (Product p: productsInStock){
+            if (p.getProductName().contains(keyword) || p.getDescription().contains(keyword)){
+                productsThatMatchKeyword.add(p);
+            }
+        }
+        return productsThatMatchKeyword;
+    }
 }
