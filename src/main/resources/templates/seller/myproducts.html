@@ -24,6 +24,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Description</th>
+                <th>Image</th>
             </thead>
             <tbody>
                 <tr th:each="product : ${products}">
@@ -31,6 +32,11 @@
                     <td th:text="${product.getPrice()}"></td>
                     <td th:text="${product.getQuantity()}"></td>
                     <td th:text="${product.getDescription()}"></td>
+
+
+                    <img src="@imgSrc" />
+                    <td><img alt="Image" th:src="'data:image/jpg;base64, ' +  ${product.getImage()}" width="250" height="250"/></td>
+
 
                     <td>
                         <c:url var="${product}" value="@{/seller/edit_product}"/>

@@ -48,10 +48,19 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message"></label>
+
                         <input type="text" th:field="*{description}" placeholder="Description"
                                class="form-control" />
                         <label
                                 class="validation-message"></label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('image')}" th:errors="*{image}" class="validation-message"></label>
+                    <div class="controls">
+                        <input id="productImage" th:field="*{image}" class="input-file" type="file">
                     </div>
                 </div>
 

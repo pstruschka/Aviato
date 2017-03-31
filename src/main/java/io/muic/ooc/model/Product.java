@@ -33,7 +33,9 @@ public class Product {
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
-
+    @Column(name = "product_image", nullable = false, columnDefinition = "mediumBlob")
+    @NotEmpty(message="*Please provide an Image for your product")
+    private byte[] image;
 
 
     private Boolean isSelling;
@@ -115,4 +117,25 @@ public class Product {
     public void setSelling(Boolean selling) {
         isSelling = selling;
     }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageAsBase64() {
+
+    }
+
+    /*
+    byte[] encoded = Base64.getEncoder().encode("Hello".getBytes());
+println(new String(encoded));   // Outputs "SGVsbG8="
+
+byte[] decoded = Base64.getDecoder().decode(encoded);
+println(new String(decoded))    // Outputs "Hello"
+     */
+
 }
