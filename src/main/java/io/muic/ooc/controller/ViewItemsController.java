@@ -52,9 +52,7 @@ public class ViewItemsController {
         ModelAndView modelAndView = new ModelAndView("/buyer/searchproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        System.out.println("---------------");
-        System.out.println(search);
-        System.out.println("---------------");
+        System.out.println(user.getUsername()+" queried for "+ search);
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByKeyword(search));
         modelAndView.addObject("products", userProducts);
         modelAndView.addObject("user",user);
