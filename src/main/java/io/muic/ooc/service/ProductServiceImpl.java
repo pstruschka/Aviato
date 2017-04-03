@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService{
         List<Product> productsInStock = findProductsInStock();
         List<Product> productsThatMatchKeyword = new ArrayList<>();
         for (Product p: productsInStock){
-            if (p.getProductName().contains(keyword) || p.getDescription().contains(keyword)){
+            if (p.getProductName().contains(keyword) || p.getDescription().contains(keyword) || p.getUser().getName().contains(keyword)) {
                 productsThatMatchKeyword.add(p);
             }
         }
