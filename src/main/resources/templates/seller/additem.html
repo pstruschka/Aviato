@@ -16,22 +16,22 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form autocomplete="off" action="#" th:action="@{/additem}"
-            th:object="${product}" method="post" class="form-horizontal"
+                  method="post" class="form-horizontal" enctype="multipart/form-data"
                   role="form">
                 <h2>Product Form</h2>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" class="validation-message"></label>
-                        <input type="text" th:field="*{productName}" placeholder="Product Name"
+                        <label th:if="${#fields.hasErrors('product.productName')}" th:errors="*{product.productName}" class="validation-message"></label>
+                        <input type="text" th:field="*{product.productName}" placeholder="Product Name"
                                class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="validation-message"></label>
+                        <label th:if="${#fields.hasErrors('product.price')}" th:errors="*{product.price}" class="validation-message"></label>
 
-                        <input type="number" th:field="*{price}"
+                        <input type="number" th:field="*{product.price}"
                                placeholder="Price" class="form-control" />
                     </div>
                 </div>
@@ -39,31 +39,30 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message"></label>
-                        <input type="number" th:field="*{quantity}"
+                        <label th:if="${#fields.hasErrors('product.quantity')}" th:errors="*{product.quantity}" class="validation-message"></label>
+                        <input type="number" th:field="*{product.quantity}"
                                placeholder="Quantity" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message"></label>
+                        <label th:if="${#fields.hasErrors('product.description')}" th:errors="*{product.description}" class="validation-message"></label>
 
-                        <input type="text" th:field="*{description}" placeholder="Description"
+                        <input type="text" th:field="*{product.description}" placeholder="Description"
                                class="form-control" />
-                        <label
-                                class="validation-message"></label>
+
                     </div>
                 </div>
-
-
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('image')}" th:errors="*{image}" class="validation-message"></label>
-                    <div class="controls">
-                        <input id="productImage" th:field="*{image}" class="input-file" type="file">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('image')}" th:errors="*{product.image}" class="validation-message"></label>
+                        <input type="file" th:field="*{product.image}" class="form-control" />
                     </div>
                 </div>
 
+                <label
+                        class="validation-message"></label>
                 <div class="form-group">
                     <div class="col-sm-9">
                         <button type="submit" class="btn btn-primary btn-block">Add Product</button>
@@ -71,6 +70,7 @@
                 </div>
                 <span th:utext="${successMessage}"></span>
             </form>
+
         </div>
     </div>
 </div>

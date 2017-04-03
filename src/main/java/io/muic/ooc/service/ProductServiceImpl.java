@@ -6,6 +6,10 @@ import io.muic.ooc.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +44,7 @@ public class ProductServiceImpl implements ProductService{
         List<Product> products = productRepository.findProductsByUser(user);
         List<Product> sellingProducts  = new ArrayList<>();
         for (Product p: products) {
-            if (p.getSelling() == true) {
+            if (p.getSelling()) {
                 sellingProducts.add(p);
             }
         }
@@ -57,7 +61,7 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> findProductsInStock() {
         List<Product> allProducts = new ArrayList<>();
         for (Product p: productRepository.findAll()) {
-            if (p.getQuantity() > 0 && p.getSelling() == true) { allProducts.add(p);}
+            if (p.getQuantity() > 0 && p.getSelling()) { allProducts.add(p);}
         }
         return allProducts;
     }
@@ -94,4 +98,8 @@ public class ProductServiceImpl implements ProductService{
         }
         return productsThatMatchKeyword;
     }
+
+
+
+
 }

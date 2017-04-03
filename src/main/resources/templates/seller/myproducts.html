@@ -10,7 +10,7 @@
     <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form th:action="@{/seller/home}" method="get">
+<form  th:action="@{/seller/home}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
 </form>
 <div class="page-header">
@@ -32,10 +32,9 @@
                     <td th:text="${product.getPrice()}"></td>
                     <td th:text="${product.getQuantity()}"></td>
                     <td th:text="${product.getDescription()}"></td>
+                    <td th:text="${product.getImage()}"></td>
 
-
-                    <img src="@imgSrc" />
-                    <td><img alt="Image" th:src="'data:image/jpg;base64, ' +  ${product.getImage()}" width="250" height="250"/></td>
+                    <!--<td><img alt="Image" th:src="'data:image/jpg;base64,'+${product.getImageInBytes()}" width="250" height="250"/></td> -->
 
 
                     <td>

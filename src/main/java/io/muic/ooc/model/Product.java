@@ -4,8 +4,10 @@ package io.muic.ooc.model;
  * Created by joakimnilfjord on 3/10/2017 AD.
  */
 
-import org.hibernate.validator.constraints.NotEmpty;
+import java.sql.Blob;
+import java.sql.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -33,13 +35,47 @@ public class Product {
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
-    @Column(name = "product_image", nullable = false, columnDefinition = "mediumBlob")
-    @NotEmpty(message="*Please provide an Image for your product")
-    private byte[] image;
+    @Column(name="image")
+    @NotNull(message = "*Please provide an image for your product")
+    @Lob
+    private Blob image;
+    @Column(name="content_type")
+    private String contentType;
+    @Column(name="created")
+    private Date created;
+
 
 
     private Boolean isSelling;
     private Integer rating;
+
+
+
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+
 
 
     @ManyToOne()
@@ -93,6 +129,7 @@ public class Product {
     public void setRating(Integer rating) {
         this.rating = rating;
     }
+
     public Long getId() {
         return id;
     }
@@ -118,24 +155,7 @@ public class Product {
         isSelling = selling;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
-    public String getImageAsBase64() {
-
-    }
-
-    /*
-    byte[] encoded = Base64.getEncoder().encode("Hello".getBytes());
-println(new String(encoded));   // Outputs "SGVsbG8="
-
-byte[] decoded = Base64.getDecoder().decode(encoded);
-println(new String(decoded))    // Outputs "Hello"
-     */
 
 }

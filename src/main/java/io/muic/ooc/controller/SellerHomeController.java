@@ -9,8 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
@@ -53,7 +56,9 @@ public class SellerHomeController {
         //System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
+        MultipartFile image = null;
         modelAndView.addObject("user", user);
+        modelAndView.addObject("image", image);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
