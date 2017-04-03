@@ -4,6 +4,8 @@ import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.ProductService;
 import io.muic.ooc.service.UserService;
+import org.apache.tomcat.jni.File;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -56,9 +63,7 @@ public class SellerHomeController {
         //System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
-        MultipartFile image = null;
         modelAndView.addObject("user", user);
-        modelAndView.addObject("image", image);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
@@ -91,6 +96,8 @@ public class SellerHomeController {
         modelAndView.setViewName("redirect:/seller/myproducts");
         return modelAndView;
     }
+
+
 
 
 

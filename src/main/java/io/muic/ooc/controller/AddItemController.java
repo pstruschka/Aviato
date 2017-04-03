@@ -19,6 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.sql.Blob;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by joakimnilfjord on 3/11/2017 AD.
@@ -36,13 +39,15 @@ public class AddItemController {
     @RequestMapping(value = "/additem", method = RequestMethod.POST)
     public ModelAndView createNewProduct(@Valid Product product,BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("seller/additem");
+        modelAndView.setViewName("seller/addimage");
         if (!bindingResult.hasErrors()) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
-        productService.saveProduct(product,user);
-        modelAndView.addObject("successMessage", "Product added successfully");
-        modelAndView.addObject("product", new Product());
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByUsername(auth.getName());
+//            product.setImage(null);
+//            product.setContentType("");
+            productService.saveProduct(product,user);
+            modelAndView.addObject("successMessage", "Product added successfully");
+            modelAndView.addObject("product", new Product());
         }
         return modelAndView;
 

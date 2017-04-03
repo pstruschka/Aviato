@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/seller/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form autocomplete="off" action="#" th:action="@{/addimage}" th:object="*{product}"
+                  method="post" class="form-horizontal" enctype="multipart/form-data"
+                  role="form">
+                <h2>Add Image</h2>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('image')}" th:errors="*{image}" class="validation-message" ></label>
+                        <input type="file" th:field="*{content}"
+                               class="form-control" />
+
+                    </div>
+                </div>
+
+
+                <label
+                        class="validation-message"></label>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+                    </div>
+                </div>
+                <span th:utext="${successMessage}"></span>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
