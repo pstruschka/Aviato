@@ -13,8 +13,10 @@
 <form th:action="@{/buyer/home}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
 </form>
-<form th:action="@{/buyer/products}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To View Products Page</button>
+<form action="#" th:action="@{/buyer/searchproducts}" method="POST">
+    <input type="text" id="search" name="search" class="form-control input-sm-10" placeholder="" type="hidden"/>
+    <button class="btn btn-md btn-default btn-block" name="View Products"
+            type="Submit">View Products</button>
 </form>
 <div class="page-header">
     <h3>My Purchase history</h3>

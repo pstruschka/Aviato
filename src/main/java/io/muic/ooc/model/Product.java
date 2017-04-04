@@ -33,14 +33,12 @@ public class Product {
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a Description for your product")
     private String description;
-
-
-
     private Boolean isSelling;
     private Integer rating;
 
     private Long quantitySold;
     private Long profit;
+
 
 
     @ManyToOne()
