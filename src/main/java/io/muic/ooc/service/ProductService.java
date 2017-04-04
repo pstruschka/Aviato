@@ -19,6 +19,7 @@ public interface ProductService {
     Boolean updateProductQuantity(Product product,Long quantity,String type);
     List<Product> findProductsInStock();
     public void notSelling(Product product);
+    List<Product> findProductsByKeyword(String keyword);
 
     //public Product findProductByProductName(String productname);
 //    public List<Product> findProductsByUser(User user);

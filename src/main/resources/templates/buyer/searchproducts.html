@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>My Cart</title>
+    <title th:text="${search} + '- Aviato Search'"</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -19,24 +19,28 @@
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Cart</button>
 </form>
 
+
 <div class="form-group">
     <div class="col-md-12">
-        <form action="#" th:action="@{/buyer/searchproducts}" method="POST">
-            <div class="row">
-                <div class="col-md-10">
-                    <input type="text" id="search" name="search" class="form-control input-sm-10" th:placeholder="${search}" />
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-info btn-sm-10" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+    <form action="#" th:action="@{/buyer/searchproducts}" method="POST">
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" id="search" name="search" class="form-control input-sm-10" th:placeholder="${search}" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-info btn-sm-10" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+        </div>
+    </form>
     </div>
 
+
+
+
 <div class="page-header">
-    <h3 th:text="${user.getName()} + ' | Products View'"></h3>
+    <h3 th:text="${user.getName()} + ' | ' + ${products.size()} + ' result(s) for  &quot;'+ ${search} + '&quot;'"></h3>
 </div>
 <div class="col-md-12 container-fluid">
     <div class="container">

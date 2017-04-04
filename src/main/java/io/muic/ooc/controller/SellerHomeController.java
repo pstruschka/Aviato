@@ -73,7 +73,6 @@ public class SellerHomeController {
 
     @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
     public ModelAndView deleteUserProduct(@RequestParam("product") Long productId) {
-        System.out.println("HERE METHOD DELETE YO");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
