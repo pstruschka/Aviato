@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +56,8 @@ public class ViewCartController {
     }
     @RequestMapping(value = "/buyer/viewcart",method = RequestMethod.POST)
     public ModelAndView confirmCart(@RequestParam("cart") Cart cart){
+        cart.setDateTimeField(new Date());
+        cartService.confirmOrderOfCart(cart);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
@@ -84,7 +87,7 @@ public class ViewCartController {
             modelAndView.addObject("priceChanged",diffProductPricethanPriceBoughtAt);
             return modelAndView;
         }
-        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
+        boolean canBeConfirmed = cartService.canConfirmOrderOfCart(cart);
 
         if (!canBeConfirmed) {
             String emptyMsg = "Your cart is empty";

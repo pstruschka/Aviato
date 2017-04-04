@@ -22,9 +22,14 @@
 <div class="col-md-12 container-fluid">
     <div class="container">
         <ul th:each="cart : ${carts}">
-            <label>Cart</label>
-            <li th:each="product : ${cart}">
-                <span th:text="${product.getProduct().getProductName()}"></span>
+            <label>
+                <span th:text="'Cart ' + ${cart.getDateTimeField()}"></span>
+            </label>
+            <li th:each="product : ${cart.getCartProducts()}">
+                <span th:text="'Name : ' + ${product.getProduct().getProductName()} + ' | '"></span>
+                <span th:text="'Quantity : '+ ${product.getQuantity().toString()} + ' | '"></span>
+                <span th:text="'Bought at : '+${product.getPriceBoughtAt().toString()} + ' | '"></span>
+                <span th:text="'Total : '+${product.getTotal()}"></span>
             </li>
         </ul>
     </div>

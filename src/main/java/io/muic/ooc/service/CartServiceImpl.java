@@ -59,7 +59,7 @@ public class CartServiceImpl implements CartService{
 
 
     @Override
-    public boolean confirmOrderOfCart(Cart cart) {
+    public boolean canConfirmOrderOfCart(Cart cart) {
         Set<CartProduct> cartProductSet = cartProductService.findCartProductsByCart(cart);
         if ( cartProductSet == null || cartProductSet.size()== 0) {
             return false;
@@ -69,6 +69,14 @@ public class CartServiceImpl implements CartService{
         cartRepository.save(cart);
         return true;
     }
+
+    @Override
+    public void confirmOrderOfCart(Cart cart) {
+        cart.setOrderConfirmed(true);
+        cartRepository.save(cart);
+    }
+
+
 
     @Override
     public Set<Set<CartProduct>> getAllCartProducts(Set<Cart> carts){

@@ -31,15 +31,10 @@ public class PurchaseHistoryController {
     public ModelAndView viewPurchaseHistory() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        System.out.println("HELLO1----------------------------------");
         Set<Cart> cartHashSet = cartService.findCartsWithConfrimedOrderByUserId(user);
-        System.out.println("HELLO2----------------------------------");
-        Set<Set<CartProduct>> all = cartService.getAllCartProducts(cartHashSet);
-        System.out.println("HELLO3----------------------------------");
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("carts",all);
+        modelAndView.addObject("carts",cartHashSet);
         modelAndView.setViewName("/buyer/purchasehistory");
-        System.out.println("HELLO4----------------------------------");
         return modelAndView;
     }
 }

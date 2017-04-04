@@ -12,7 +12,8 @@ import java.util.Set;
 public interface CartService {
     public Cart findCartWithUnconfirmedOrderByUserId(User user);
     public Set<Cart> findCartsWithConfrimedOrderByUserId(User user);
-    public boolean confirmOrderOfCart(Cart cart);
+    public boolean canConfirmOrderOfCart(Cart cart);
+    public void confirmOrderOfCart(Cart cart);
     public Set<Set<CartProduct>> getAllCartProducts(Set<Cart> carts);
     
 }

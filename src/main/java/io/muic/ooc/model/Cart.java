@@ -5,6 +5,7 @@ package io.muic.ooc.model;
  */
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -23,6 +24,18 @@ public class Cart {
     private Set<CartProduct> cartProducts;
 
     private boolean orderConfirmed;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DATETIME_FIELD")
+    private java.util.Date dateTimeField;
+
+    public String getDateTimeField() {
+        return dateTimeField.toString();
+    }
+
+    public void setDateTimeField(Date dateTimeField) {
+        this.dateTimeField = dateTimeField;
+    }
 
     public Long getCartId() { return cartId; }
 
