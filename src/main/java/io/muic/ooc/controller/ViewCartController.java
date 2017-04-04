@@ -107,9 +107,11 @@ public class ViewCartController {
         cartProductService.remove(cartProductId);
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
         Long totalPrice = 0L;
+        Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
+        totalPrice = cartProductService.getTotalPrice(cartProducts);
         modelAndView.addObject("user",user);
+        modelAndView.addObject("cartProducts",cartProducts);
         modelAndView.addObject("totalPrice",totalPrice);
-
         modelAndView.addObject("cart",cart);
         modelAndView.setViewName("/buyer/viewcart");
         return modelAndView;
