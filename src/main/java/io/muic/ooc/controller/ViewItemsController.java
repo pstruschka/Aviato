@@ -91,7 +91,7 @@ public class ViewItemsController {
         else{
             modelAndView.addObject("successProduct", product.getId());
             modelAndView.addObject("successMessage","Added " + quantity.toString() + " to Cart");
-            productService.updateProductQuantity(product,quantity,"subtract");
+            productService.updateProductQuantity(product,quantity);
             cartProductService.updateCartProduct(product, cart, quantity);
         }
         // productService.updateProductQuantity(product,quantity);

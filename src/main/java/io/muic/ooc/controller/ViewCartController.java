@@ -2,6 +2,7 @@ package io.muic.ooc.controller;
 
 import io.muic.ooc.model.Cart;
 import io.muic.ooc.model.CartProduct;
+import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.CartProductService;
 import io.muic.ooc.service.CartService;
@@ -106,12 +107,16 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         CartProduct cartProduct =  cartProductService.findCartProductsById(cartProductId);
-        productService.updateProductQuantity(cartProduct.getProduct(),cartProduct.getQuantity(),"add");
+
+        productService.updateProductQuantity(cartProduct.getProduct(),-cartProduct.getQuantity());
         cartProductService.remove(cartProductId);
+
+
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
         Long totalPrice = 0L;
         Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
         totalPrice = cartProductService.getTotalPrice(cartProducts);
+
         modelAndView.addObject("user",user);
         modelAndView.addObject("cartProducts",cartProducts);
         modelAndView.addObject("totalPrice",totalPrice);
