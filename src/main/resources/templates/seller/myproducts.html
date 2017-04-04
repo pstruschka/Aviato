@@ -13,6 +13,10 @@
 <form th:action="@{/seller/home}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
 </form>
+<form th:action="@{/seller/sellerhistory}" method="get">
+    <button class="btn btn-md btn-default btn-block" name="Product History"
+            type="Submit">Product History</button>
+</form>
 <div class="page-header">
     <h3 th:text="${user.getName()} + ' | My Products'"></h3>
 </div>

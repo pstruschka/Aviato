@@ -39,6 +39,9 @@ public class Product {
     private Boolean isSelling;
     private Integer rating;
 
+    private Long quantitySold;
+    private Long profit;
+
 
     @ManyToOne()
     @JoinColumn(name = "User_id")
@@ -114,5 +117,21 @@ public class Product {
 
     public void setSelling(Boolean selling) {
         isSelling = selling;
+    }
+
+    public Long getQuantitySold() {
+        return quantitySold;
+    }
+
+    public void setQuantitySold(Long quantitySold) {
+        this.quantitySold = quantitySold;
+    }
+
+    public Long getProfit() {
+        return profit;
+    }
+
+    public void setProfit(Long profit) {
+        this.profit = profit;
     }
 }

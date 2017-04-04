@@ -1,5 +1,6 @@
 package io.muic.ooc.service;
 
+import io.muic.ooc.model.Cart;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 
@@ -20,6 +21,7 @@ public interface ProductService {
     List<Product> findProductsInStock();
     public void notSelling(Product product);
     List<Product> findProductsByKeyword(String keyword);
+    public void updateHistory(Cart cart);
 
     //public Product findProductByProductName(String productname);
 //    public List<Product> findProductsByUser(User user);

@@ -10,26 +10,22 @@
     <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form th:action="@{/buyer/home}" method="get">
+<form th:action="@{/seller/home}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
 </form>
-<form th:action="@{/buyer/products}" method="get">
+<form th:action="@{/seller/products}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To View Products Page</button>
 </form>
 <div class="page-header">
-    <h3>My Purchase history</h3>
+    <h3>Product history</h3>
 </div>
 <div class="col-md-12 container-fluid">
     <div class="container">
-        <ul th:each="cart : ${carts}">
-            <label>
-                <span th:text="'Cart ' + ${cart.getDateTimeField()}"></span>
-            </label>
-            <li th:each="product : ${cart.getCartProducts()}">
-                <span th:text="'Name : ' + ${product.getProduct().getProductName()} + ' | '"></span>
-                <span th:text="'Quantity : '+ ${product.getQuantity().toString()} + ' | '"></span>
-                <span th:text="'Bought at : '+${product.getPriceBoughtAt().toString()} + ' | '"></span>
-                <span th:text="'Total : '+${product.getTotal().toString()}"></span>
+        <ul th:each="product : ${products}">
+            <li>
+                <span th:text="'Name : ' + ${product.getProductName()} + ' | '"></span>
+                <span th:text="'Quantity Sold: '+ ${product.getQuantitySold().toString()} + ' | '"></span>
+                <span th:text="'Profit : '+${product.getProfit().toString()} + ' | '"></span>
             </li>
         </ul>
     </div>

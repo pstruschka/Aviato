@@ -1,9 +1,12 @@
 package io.muic.ooc.service;
 
+import io.muic.ooc.model.Cart;
+import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -94,5 +97,19 @@ public class ProductServiceImpl implements ProductService{
             }
         }
         return productsThatMatchKeyword;
+    }
+
+    public void updateHistory(Cart cart){
+        for(CartProduct cartProduct: cart.getCartProducts()){
+            Product product = cartProduct.getProduct();
+            Long totalCartProduct = cartProduct.getTotal();
+            Long totalProfit = product.getProfit();
+            Long cpQuantity = cartProduct.getQuantity();
+            Long productQuantity = product.getQuantitySold();
+            product.setQuantitySold(cpQuantity + productQuantity);
+            product.setProfit(totalCartProduct + totalProfit);
+            productRepository.save(product);
+
+        }
     }
 }

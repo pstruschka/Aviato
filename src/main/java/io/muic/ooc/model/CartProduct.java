@@ -77,9 +77,9 @@ public class CartProduct implements Serializable{
         this.priceBoughtAt = priceBoughtAt;
     }
 
-    public String getTotal(){
+    public Long getTotal(){
         Long total =  this.getQuantity() * this.getPriceBoughtAt();
-        return total.toString();
+        return total;
     }
 
 }
