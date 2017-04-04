@@ -73,8 +73,12 @@ public class ProductServiceImpl implements ProductService{
     public Set<Product> findProductsByKeyword(String keyword) {
         List<Product> productsInStock = findProductsInStock();
         Set<Product> productsThatMatchKeyword = new HashSet<>();
+        String Keyword = keyword.toLowerCase();
         for (Product p: productsInStock){
-            if (p.getProductName().contains(keyword) || p.getDescription().contains(keyword) || p.getUser().getName().contains(keyword)) {
+            String productName = p.getProductName().toLowerCase();
+            String description = p.getDescription().toLowerCase();
+            String sellerName = p.getUser().getName().toLowerCase();
+            if (productName.contains(Keyword) || description.contains(Keyword) || sellerName.contains(Keyword)) {
                 productsThatMatchKeyword.add(p);
             }
         }
