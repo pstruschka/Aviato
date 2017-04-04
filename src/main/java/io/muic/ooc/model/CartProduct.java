@@ -28,6 +28,11 @@ public class CartProduct implements Serializable{
 
     @Column(name = "quantity")
     private Long quantity;
+
+
+
+    private Long priceBoughtAt;
+
 //    public CartProduct(){
 //    }
 //    public CartProduct( productId,Long CartId ){
@@ -62,6 +67,14 @@ public class CartProduct implements Serializable{
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getPriceBoughtAt() {
+        return priceBoughtAt;
+    }
+
+    public void setPriceBoughtAt(Long priceBoughtAt) {
+        this.priceBoughtAt = priceBoughtAt;
     }
 
 }

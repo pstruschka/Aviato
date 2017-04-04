@@ -17,4 +17,5 @@ public interface CartProductService {
     public CartProduct findCartProductsById(Long cartProductId);
     public boolean remove(Long cartProductId);
     public Set<CartProduct> findCartProducts(Cart cart);
+    public Set<String> findCartProductsByCartAndCompareProductPricevsBoughtAtPrice(Cart cart);
 }
