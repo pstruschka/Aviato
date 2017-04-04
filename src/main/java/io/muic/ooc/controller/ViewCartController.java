@@ -59,12 +59,7 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user",user);
-        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
-        if (!canBeConfirmed) {
-            modelAndView.addObject("cart",cart);
-            modelAndView.setViewName("/buyer/viewcart");
-            return modelAndView;
-        }
+
         modelAndView.setViewName("/buyer/home");
         return modelAndView;
     }
@@ -80,6 +75,24 @@ public class ViewCartController {
         modelAndView.addObject("totalPrice",totalPrice);
         modelAndView.addObject("user",user);
         modelAndView.addObject("cart",cart);
+
+        Set<String> diffProductPricethanPriceBoughtAt = cartProductService.findCartProductsByCartAndCompareProductPricevsBoughtAtPrice(cart);
+
+        if (diffProductPricethanPriceBoughtAt.size() != 0) {
+            modelAndView.addObject("cartProducts",cartProducts);
+            modelAndView.setViewName("/buyer/viewcart");
+            modelAndView.addObject("priceChanged",diffProductPricethanPriceBoughtAt);
+            return modelAndView;
+        }
+        boolean canBeConfirmed = cartService.confirmOrderOfCart(cart);
+
+        if (!canBeConfirmed) {
+            String emptyMsg = "Your cart is empty";
+            modelAndView.addObject("cart",cart);
+            modelAndView.addObject("emptyMsg",emptyMsg);
+            modelAndView.setViewName("/buyer/viewcart");
+            return modelAndView;
+        }
         modelAndView.setViewName("/buyer/payment");
         return modelAndView;
     }
@@ -93,7 +106,10 @@ public class ViewCartController {
         productService.updateProductQuantity(cartProduct.getProduct(),cartProduct.getQuantity(),"add");
         cartProductService.remove(cartProductId);
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
+        Long totalPrice = 0L;
         modelAndView.addObject("user",user);
+        modelAndView.addObject("totalPrice",totalPrice);
+
         modelAndView.addObject("cart",cart);
         modelAndView.setViewName("/buyer/viewcart");
         return modelAndView;
