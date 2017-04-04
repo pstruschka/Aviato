@@ -4,58 +4,318 @@
 
 <head>
     <title>Buyer Home</title>
-    <h2>Buyer Home</h2>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<h2>Buyer Home</h2>-->
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/anima.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+    <link rel="stylesheet" th:href="@{/css/switcher.css}">
+    <link rel="stylesheet" th:href="@{/css/green.css}" class="colors">
+    <link rel="shortcut icon" th:href="@{/images/32.png}" sizes="32x32" type="image/png"/>
+    <link rel="apple-touch-icon-precomposed" th:href="@{/images/60.png}" type="image/png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/images/72.png}" type="image/png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" th:href="@{/images/120.png}" type="image/png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" th:href="@{/images/152.png}" type="image/png"/>
 </head>
 
-<body>
-<div class="container">
-    <div class="form-group">
-        <div class="col-md-12">
-            <form action="#" th:action="@{/buyer/searchproducts}" method="POST">
-                <div class="row">
-                    <div class="col-md-10">
-                        <input type="text" id="search" name="search" class="form-control input-sm-10" th:placeholder="${search}" />
+<body id="home">
+    <div id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home">
+                    <img id="navlogo" th:src="@{/images/navlogo-green.png}" alt="microstore" width="122" height="45">
+                </a>
+
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul id="navigation" class="nav navbar-nav navbar-right text-center">
+                    <li>
+                        <form th:action="@{/buyer/products}" method="get">
+                            <button class="btn btn-default dropdown-toggle" name="Logout" type="Submit">Products</button>
+                        </form>
+                    </li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#orderform">Order</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="get">
+                            <button class="btn btn-default dropdown-toggle" name="Logout" type="Submit">Logout</button>
+                        </form>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section id="hero" class="hero-slider light-typo full-height" data-height="600" >
+        <div id="hero-slider" class="owl-carousel owl-theme" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="fadeOut">
+
+            <div class="item m-center" style="background-image: th:url(@{/images/01.jpg);">
+                <div class="center-box">
+                    <span class="overlay-bg"></span>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                <div class="hero-unit">
+                                    <img id="logo" th:src="@{/images/logo-green.png}" class="img-responsive text-center" alt="shop logo" width="300">
+                                    <p>If you have 1-3  or more products for sale AviatoPrime is perfect place for you!</p>
+                                    <a class="btn btn-store smooth-scroll" th:href="@{/buyer/products}" method="get">browse the goods</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-info btn-sm-10" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
+                </div>
+            </div>
+
+            <div class="item m-center" style="background-image: h:url(@{/images/06.jpg);">
+                <div class="center-box">
+                    <span class="overlay-bg"></span>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                <div class="hero-unit">
+                                    <h2>Nightstand</h2>
+                                    <p>Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                    <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy $400</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item m-center" style="background-image: h:url(@{/images/10.jpg);">
+                <div class="center-box">
+                    <span class="overlay-bg"></span>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                <div class="hero-unit">
+                                    <h2>Hammock</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                    <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy now $600</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="about" class="padding-top-bottom ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 anima fadeInLeft">
+                    <header class="section-header cta-message">
+                        <h2>About company</h2>
+                        <h4>Pellentesque interdum eget</h4>
+                    </header>
+                </div>
+                <div class="col-md-8 cta-message anima fade-up">
+                    <p>Pellentesque interdum eget odio eu rutrum. Nunc tempus massa a tellus aliquet sodales. Nunc urna tortor, rhoncus accumsan vestibulum non, feugiat a mauris. In hac habitasse platea dictumst. In sagittis orci nec aliquet tristique.</p>
+                    <p style="display:none;" id="showme">Phasellus porta eros vel lacus euismod consequat. Phasellus eleifend, nibh non feugiat hendrerit, lacus enim adipiscing eros, a pharetra erat neque eget est. Quisque vitae aliquet urna. Integer suscipit lectus eu enim porttitor fringilla. Ut blandit, urna in auctor euismod, arcu eros pharetra metus, a porta purus libero a nibh.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                    <a class="btn btn-store outline" id="show-btn" href="#">Read more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonial" class="padding-top-bottom image-bg light-typo">
+        <div class="container">
+
+            <div class="testimonial">
+                <div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example" data-interval="10000">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <h1>This is one of the most beautiful site I have ever seen in my life. <br>Your site is great!</h1>
+                            <br>
+                            <h3>Brad Cooper</h3>
+                        </div>
+                        <div class="item">
+                            <h1>The Difference between ordinary and extraordinary <br>is just that little extra.</h1>
+                            <br>
+                            <h3>Albert Einstein</h3>
+                        </div>
+                        <div class="item">
+                            <h1>Hugely thought out! <br>Trying it now.I like the use of shape and background image!</h1>
+                            <br>
+                            <h3>John Doe</h3>
+                        </div>
+                    </div>
+                    <br><br><br>
+                </div>
+            </div>
+            <div class="overlay-bg"></div>
+        </div>
+    </section>
+
+
+    <section id="cta" class="padding-top-bottom color-bg light-typo">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 col-sm-4 news anima fade-up">
+                    <i class="icon-trophy iconBig"></i>
+                    <h3>Quality guaranteed</h3>
+                </div>
+                <div class="col-md-4 col-sm-4 news anima fade-up d1">
+                    <i class="icon-truck iconBig"></i>
+                    <h3>Home delivery</h3>
+                </div>
+                <div class="col-md-4 col-sm-4 anima fade-up d2">
+                    <i class="icon-lock iconBig"></i>
+                    <h3>Secure payment</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="gray-bg padding-top-bottom">
+        <div class="container">
+            <header class="section-header text-center">
+                <h1><strong>Contact</strong></h1>
+                <p>Do you have some kind of problem with our products?</p>
+            </header>
+            <form action="index.html" method="post" novalidate id="contact-form">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 contact-info cta-message anima fade-right">
+                        <address>
+                            <strong>AviatoPrime</strong><br>
+                            84 State Road 123<br>
+                            NP, Salaya 24813<br>
+                            (123) 456 - 7890<br>
+                            contact@aviatoprime.com
+                        </address>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-8 anima fade-up d1" >
+                        <div class="form-group">
+                            <label class="control-label" for="contact-name">Name</label>
+                            <div class="controls">
+                                <input id="contact-name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="contact-mail">Email</label>
+                            <div class=" controls">
+                                <input id="contact-mail" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="contact-message">Message</label>
+                            <div class="controls">
+                                <textarea id="contact-message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <p>
+                            <button name="submit" type="submit" class="btn btn-store btn-block">Send Message</button></p>
+                        <input type="hidden" name="submitted" id="submitted3" value="true">
                     </div>
                 </div>
             </form>
         </div>
+    </section>
+    <footer id="main-footer" class="dark-bg light-typo">
+        <div class="container">
+            <p class="pull-left copyright">&copy; AviatoPrime 2017.</p>
 
-    <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout</button>
-    </form>
-
-    <form th:action="@{/buyer/products}" method="get">
-        <button class="btn btn-md btn-default btn-block" name="View Products"
-                type="Submit">View Products</button>
-    </form>
-
-    <form th:action="@{/buyer/purchasehistory}" method="get">
-        <button class="btn btn-md btn-default btn-block" name="View Purchase History"
-                type="Submit">View Purchase History</button>
-    </form>
-
-    <div class="panel-group" style="margin-top:40px">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <span th:utext="${userName}"></span>
+            <div class="pull-right paymentMethodImg copyright">
+                <a class="btn btn-store outline" href="#" data-toggle="modal" data-target=".text-modal">Terms & conditions</a>
             </div>
-            <div class="panel-body">
-                <img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400" alt="Beer" />
+        </div>
+    </footer>
+
+    <div class="modal fade text-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="color-bg">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-xs-12 col-sm-12 col-md-12 color-bg light-typo" id="9modal-bar">
+                                <h2 class="pull-left">TERMS & CONDITIONS</h2>
+                                <a class="close pull-right" href="#" data-dismiss="modal" ><i class="icon-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-xs-12 col-sm-6 col-md-6" >
+                            <h3>Pricing policy</h3>
+                            <p>Prices are shown in € (EURO). All prices include Danish VAT of 25%. Prices do not include service, payment and delivery charges. Orders may be subjected to local taxes and/or import duties at your own expense.
+                                Tax-free shopping on microStore.com is not available.
+                                micro Store the right to change prices of the products. The prices of the products will, during the time of placing an order, be valid throughout the process. We however take reservations for typing errors.</p>
+                            <h3>Payment</h3>
+                            <p>We accept the following credit- and debit cards: Visa, Mastercard, Maestro, Visa Electron, JCB, UnionPay and American Express.The amount for your order will not be charged until your order is shipped from microStore.
+                                We also accept microStore online gift cards.</p>
+                            <h3>Order confirmation</h3>
+                            <p>You will receive an order confirmation by e-mail shortly after placing your order. On rare occasions an item can be out of stock. Then you will be informed by e-mail.</p>
+                            <h3>Shipping</h3>
+                            <p>We know that you can’t wait to get your order so we do our best to ship your order on the following working day. To follow the goods way to your closet you can track your order with the tracking number included in your shipping confirmation, which you get by e-mail as soon as we dispatch your order.
+                                Your order will be dispatched within 1-3 workdays from the time you place your order. When your order is dispatched, you will receive a shipping confirmation by e-mail. Orders to Denmark above 200€ and all international orders will include a tracking number to your shipping confirmation. All orders within EU are shipped via GLS and outside Europe orders are shipped via TNT, UPS and FedEx.
+                                The following shipping charges will be added to your order:<br>
+                                Denmark: 4 EUR <br>
+                                Europe: 8 EUR <br>
+                                Rest of the world: 16 EUR <br>
+                                Danish orders will be delivered within 1-3 days from the day you received your shipping confirmation.
+                                International orders will be delivered within 1-10 days from the day you received your shipping confirmation.
+                                Orders are not shipped or delivered on weekends and holidays. If a delivery suffers a delay or an item happens to be out of stock, you will be informed by e-mail as quick as possible and latest 30 days after the order was placed. Some delays may occur during sales, very busy periods, public holidays and severe weather conditions.
+                                Please notice that we are unable to deliver to P.O. box adresses.</p>
+                            <h3>Returns</h3>
+                            <p>If you change your mind about an item you must notify us within 14 days after having received your purchase and ship it to microStore within the following 14 days from having notified us. To return an order please contact shop@microStore.com and await our return confirmation. When received, you can return your order by the following procedure:
+                                Make sure that the product is still in perfect condition with undamaged packaging and tags still attached. We reserve the right to refuse any returns that do not match with these critetia:</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6" >
+                            <p><br><br>Place the product in a shipping box or plastic bag. Hats and caps must be returned in a box so they do not get squashed out of shape.
+                                Enclose the original sales receipt to the product.
+                                Write RETURN on the package to ensure a faster expedition.
+                                Send the package to: microStore, 84 State Road 123, City, State 24813
+                                The return and financial responsibility is yours until it reaches microStore and are confirmed by a delivery confirmation. Please notice that we can exchange your items to another size or color if available in stock.</p>
+                            <h3>Warranty claims</h3>
+                            <p>There is a 2 years warranty on all products sold on www.microStore.com. This warranty covers manufacturing faults only, not wear and tear from regular use. Please contact us at shop@microStore.com if you have a warranty claim, including order number, photos of the claim area and a description of the claim.</p>
+                            <h3>Disclaimer</h3>
+                            <p>microStore does not guarantee that all items shown are in stock at the time of your order. In the event that an item is unavailable for whatever reason, microStore will contact you by e-mail. Although we do our best to display correct images, correct colours, info and prices, errors may occur.</p>
+                            <h3>Privacy policy</h3>
+                            <p>All your personal information is handled under strict confidence. microStore.com will never give any of your personal information to 3rd parties.All information is encrypted for safety.</p>
+                            <h3>Security</h3>
+                            <p>For the safety of your personal information, we use SLL encryption on all data to and from the site. When placing an order, you can immediately check the security validity by clicking the padlock icon that appears in the URL line of your browser when SSL is activated.</p>
+                            <h3>Cookies</h3>
+                            <p>Cookies are used by microStore.com in order to improve your experience when browsing and using the website. The cookie identifies your computer and allows the site to remember your personal settings. microStore.com may not operate properly when cookies are disabled in your web browser.</p>
+                            <h3>Measurements</h3>
+                            <p>All measurements are approximate and variance may occur. We have done our best but please have average sizing in mind and note that +/- 1cm on each measurement may occur.</p>
+                            <h3>Age restrictions</h3>
+                            <p>Parental or guardian consent is required for customers under the age of 18.</p>
+                            <h3>Governing law</h3>
+                            <p>The terms of use are complied in accordance with Danish law and the Danish courts will have exclusive jurisdiction.
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center" >
+                            <a class="btn btn-store" href="#" data-dismiss="modal">Back to shop</a><br><br>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
         </div>
     </div>
-
-</div>
+    <script type="text/javascript" th:src="@{/js/plugins.js}"></script>
+    <script type="text/javascript" th:src="@{/js/custom2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ga.js}"></script>
 </body>
 </html>
