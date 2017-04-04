@@ -8,10 +8,7 @@ import io.muic.ooc.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by joakimnilfjord on 3/24/2017 AD.
@@ -56,6 +53,8 @@ public class CartProductServiceImpl implements  CartProductService {
 
         }
 
+
+
     @Override
     public Set<CartProduct> findCartProductsByCart(Cart cart) {
         Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
@@ -90,6 +89,8 @@ public class CartProductServiceImpl implements  CartProductService {
         return cartProducts;
     }
 
+
+
     @Override
     public Long getTotalPrice(Set<CartProduct> cartProductSet) {
        Long totalPrice = 0L;
@@ -102,6 +103,8 @@ public class CartProductServiceImpl implements  CartProductService {
         return totalPrice;
 
     }
+
+
 
     @Override
     public CartProduct findCartProductsById(Long cartProductId) {
@@ -127,6 +130,18 @@ public class CartProductServiceImpl implements  CartProductService {
         return cartProducts;
     }
 
-
+    @Override
+    public Set<CartProduct> findCartProductsByProduct(List<Product> productOfSeller) {
+        Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
+        Set<CartProduct> soldProducts = new HashSet<>();
+        for (Product product:productOfSeller) {
+            for (CartProduct cartProduct: allCartProducts) {
+                if (cartProduct.getCart().isOrderConfirmed() && cartProduct.getProduct().equals(product)) {
+                    soldProducts.add(cartProduct);
+                }
+            }
+        }
+        return soldProducts;
+    }
 }
 

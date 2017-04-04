@@ -5,6 +5,7 @@ import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,4 +19,5 @@ public interface CartProductService {
     public boolean remove(Long cartProductId);
     public Set<CartProduct> findCartProducts(Cart cart);
     public Set<String> findCartProductsByCartAndCompareProductPricevsBoughtAtPrice(Cart cart);
+    public Set<CartProduct> findCartProductsByProduct(List<Product> productsOfSeller);
 }
