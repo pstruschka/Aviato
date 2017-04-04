@@ -32,6 +32,7 @@ public class ViewItemsController {
     @Autowired
     CartService cartService;
 
+    /*
     @RequestMapping(value="/buyer/products",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -40,11 +41,14 @@ public class ViewItemsController {
         User user = userService.findUserByUsername(auth.getName());
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
+
         modelAndView.addObject("cart",cart.getCartId());
+
         modelAndView.addObject("user", user);
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
+    */
 
     @RequestMapping(value = "/buyer/searchproducts",method = RequestMethod.POST)
     @ResponseBody
@@ -54,9 +58,17 @@ public class ViewItemsController {
         User user = userService.findUserByUsername(auth.getName());
         System.out.println(user.getUsername()+" queried for "+ search);
         ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByKeyword(search));
+        //String searchQueryTitle = "${user.getName()} + ' | ' + ${products.size()} + ' result(s) for  &quot;'+ ${search} + '&quot;'";
+        Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
+        String searchQueryTitle = "";
+        if (!search.equals("")){
+            searchQueryTitle = user.getName() + " | " + userProducts.size() + " result(s) for " + search + "";
+        }
         modelAndView.addObject("products", userProducts);
+        modelAndView.addObject("cart",cart.getCartId());
         modelAndView.addObject("user",user);
         modelAndView.addObject("search",search);
+        modelAndView.addObject("searchQueryTitle", searchQueryTitle);
         return modelAndView;
     }
 
@@ -64,7 +76,7 @@ public class ViewItemsController {
     @ResponseBody
     public ModelAndView buyProducts(@ModelAttribute("product") Long productId,
                                     @RequestParam("quantity") Long quantity, Model model) {
-        ModelAndView modelAndView = new ModelAndView("/buyer/viewproducts");
+        ModelAndView modelAndView = new ModelAndView("/buyer/searchproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);

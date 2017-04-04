@@ -24,10 +24,9 @@ public class BuyerHomeController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        String search = "";
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.addObject("search",search);
+
         modelAndView.setViewName("/buyer/home");
         return modelAndView;
     }
