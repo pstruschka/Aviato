@@ -4,11 +4,7 @@
 
 <head>
     <title>Buyer Home</title>
-    <!--<h2>Buyer Home</h2>-->
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />-->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <!--<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
-    <!--<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -17,6 +13,9 @@
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
     <link rel="stylesheet" th:href="@{/css/switcher.css}">
     <link rel="stylesheet" th:href="@{/css/green.css}" class="colors">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" th:href="@{/images/32.png}" sizes="32x32" type="image/png"/>
     <link rel="apple-touch-icon-precomposed" th:href="@{/images/60.png}" type="image/png"/>
     <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/images/72.png}" type="image/png"/>
@@ -38,18 +37,16 @@
                 <ul id="navigation" class="nav navbar-nav navbar-right text-center">
                     <li>
                         <form th:action="@{/buyer/products}" method="get">
-                            <button class="btn btn-default dropdown-toggle" name="Logout" type="Submit">Products</button>
+                            <button class="btn btn-default dropdown-toggle" name="Product" type="Submit">Products</button>
                         </form>
                     </li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#orderform">Order</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><button class="btn btn-default dropdown-toggle" name="About" href="#about">About</button></li>
+                    <li><button class="btn btn-default dropdown-toggle" name="Contact" href="#contact">Contact</button></li>
                     <li>
                         <form th:action="@{/logout}" method="get">
                             <button class="btn btn-default dropdown-toggle" name="Logout" type="Submit">Logout</button>
                         </form>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -58,7 +55,7 @@
     <section id="hero" class="hero-slider light-typo full-height" data-height="600" >
         <div id="hero-slider" class="owl-carousel owl-theme" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="fadeOut">
 
-            <div class="item m-center" style="background-image: th:url(@{/images/01.jpg);">
+            <div class="item m-center">
                 <div class="center-box">
                     <span class="overlay-bg"></span>
                     <div class="container-fluid">
@@ -75,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="item m-center" style="background-image: h:url(@{/images/06.jpg);">
+            <div class="item m-center">
                 <div class="center-box">
                     <span class="overlay-bg"></span>
                     <div class="container-fluid">
@@ -92,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="item m-center" style="background-image: h:url(@{/images/10.jpg);">
+            <div class="item m-center">
                 <div class="center-box">
                     <span class="overlay-bg"></span>
                     <div class="container-fluid">
@@ -169,15 +166,15 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4 col-sm-4 news anima fade-up">
-                    <i class="icon-trophy iconBig"></i>
+                    <i class="glyphicon glyphicon-check"></i>
                     <h3>Quality guaranteed</h3>
                 </div>
                 <div class="col-md-4 col-sm-4 news anima fade-up d1">
-                    <i class="icon-truck iconBig"></i>
+                    <i class="	glyphicon glyphicon-home"></i>
                     <h3>Home delivery</h3>
                 </div>
                 <div class="col-md-4 col-sm-4 anima fade-up d2">
-                    <i class="icon-lock iconBig"></i>
+                    <i class="glyphicon glyphicon-lock"></i>
                     <h3>Secure payment</h3>
                 </div>
             </div>
@@ -222,7 +219,7 @@
                             </div>
                         </div>
                         <p>
-                            <button name="submit" type="submit" class="btn btn-store btn-block">Send Message</button></p>
+                            <button th:action="@{/buyer/home}" name="submit" type="submit" class="btn btn-store btn-block">Send Message</button></p>
                         <input type="hidden" name="submitted" id="submitted3" value="true">
                     </div>
                 </div>

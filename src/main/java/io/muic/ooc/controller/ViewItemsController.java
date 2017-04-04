@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class ViewItemsController {
@@ -32,7 +31,7 @@ public class ViewItemsController {
     @Autowired
     CartService cartService;
 
-    /*
+
     @RequestMapping(value="/buyer/products",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -48,7 +47,6 @@ public class ViewItemsController {
         modelAndView.addObject("products", userProducts);
         return modelAndView;
     }
-    */
 
     @RequestMapping(value = "/buyer/searchproducts",method = RequestMethod.POST)
     @ResponseBody
