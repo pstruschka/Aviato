@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -31,6 +32,7 @@ public class CartProductServiceImpl implements  CartProductService {
             cartProduct.setProduct(product);
             cartProduct.setCart(cart);
             cartProduct.setQuantity(quantity);
+            cartProduct.setPriceBoughtAt(product.getPrice());
             cartProductRepository.save(cartProduct);
             return cartProduct;
         }
@@ -38,6 +40,7 @@ public class CartProductServiceImpl implements  CartProductService {
             if (cp.getCart().equals(cart) && cp.getProduct().equals(product)) {
                 quantity = cp.getQuantity() + quantity;
                 cp.setQuantity(quantity);
+                cp.setPriceBoughtAt(product.getPrice());
                 cartProductRepository.save(cp);
                 return cp;
             }
@@ -45,6 +48,7 @@ public class CartProductServiceImpl implements  CartProductService {
 
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProduct(product);
+        cartProduct.setPriceBoughtAt(product.getPrice());
         cartProduct.setCart(cart);
         cartProduct.setQuantity(quantity);
         cartProductRepository.save(cartProduct);
@@ -62,6 +66,24 @@ public class CartProductServiceImpl implements  CartProductService {
                     cartProducts.add(cp);
                 }else {
                     cartProductRepository.delete(cp);
+                }
+            }
+        }
+        return cartProducts;
+    }
+
+
+    @Override
+    public Set<String> findCartProductsByCartAndCompareProductPricevsBoughtAtPrice(Cart cart) {
+        Iterable<CartProduct> allCartProducts = cartProductRepository.findAll();
+        Set<String> cartProducts = new HashSet<>();
+        for (CartProduct cp:  allCartProducts) {
+            if (cp.getCart().equals(cart)) {
+                if (!Objects.equals(cp.getProduct().getPrice(), cp.getPriceBoughtAt())){
+                    Product product = cp.getProduct();
+                    String priceChanged = String.format("Product : %s, Old Price : %d, New Price : %d"
+                            ,product.getProductName(), cp.getPriceBoughtAt(),product.getPrice());
+                    cartProducts.add(priceChanged);
                 }
             }
         }

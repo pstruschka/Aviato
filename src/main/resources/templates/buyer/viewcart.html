@@ -47,6 +47,10 @@
         </table>
         <h2 th:text="'Total Price:' + ${totalPrice}"></h2>
     </div>
+    <p style="color:red; text-align: center; font-size: 32px;" th:text="${emptyMsg}"></p>
+    <ul th:each="diffPrice : ${priceChanged}">
+        <li th:text="${diffPrice}"></li>
+    </ul>
     <form th:action="@{/buyer/payment}" method="get">
         <input type="hidden" th:value="${cart.getCartId()}" name="cart"/>
         <button class="btn btn-md btn-warning btn-block" type="Submit">Checkout</button>
