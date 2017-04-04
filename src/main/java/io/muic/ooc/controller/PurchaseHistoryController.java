@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -31,7 +30,7 @@ public class PurchaseHistoryController {
     public ModelAndView viewPurchaseHistory() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        Set<Cart> cartHashSet = cartService.findCartsWithConfrimedOrderByUserId(user);
+        Set<Cart> cartHashSet = cartService.findCartsWithConfirmedOrderByUserId(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("carts",cartHashSet);
         modelAndView.setViewName("/buyer/purchasehistory");

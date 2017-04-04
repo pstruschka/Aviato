@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import io.muic.ooc.model.User;
 
-@Repository("userRepository")
+import java.util.List;
+
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	 User findByUsername(String username);
+	 List<User> findUsersByUsernameContains(String keyword);
 }

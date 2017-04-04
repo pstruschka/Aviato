@@ -80,7 +80,7 @@ public class ViewCartController {
         modelAndView.addObject("user",user);
         modelAndView.addObject("cart",cart);
 
-        Set<String> diffProductPricethanPriceBoughtAt = cartProductService.findCartProductsByCartAndCompareProductPricevsBoughtAtPrice(cart);
+        Set<String> diffProductPricethanPriceBoughtAt = cartProductService.findCartProductsByCartAndCompareProductPriceVsBoughtAtPrice(cart);
 
         if (diffProductPricethanPriceBoughtAt.size() != 0) {
             modelAndView.addObject("cartProducts",cartProducts);
@@ -107,8 +107,7 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         CartProduct cartProduct =  cartProductService.findCartProductsById(cartProductId);
-
-        productService.updateProductQuantity(cartProduct.getProduct(),-cartProduct.getQuantity());
+        productService.updateProductQuantity(cartProduct.getProduct(),cartProduct.getQuantity());
         cartProductService.remove(cartProductId);
 
 

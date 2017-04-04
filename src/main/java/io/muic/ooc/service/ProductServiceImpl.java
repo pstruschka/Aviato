@@ -5,12 +5,14 @@ import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 import io.muic.ooc.repository.ProductRepository;
+import io.muic.ooc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service("productService")
@@ -18,6 +20,8 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void saveProduct(Product product,User user) {
@@ -29,13 +33,6 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
     }
 
-
-
-    public void notSelling(Product product) {
-        product.setSelling(false);
-        productRepository.save(product);
-    }
-
     @Override
     public void removeProduct(Product product) {
         product.setSelling(false);
@@ -44,35 +41,23 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> findProductsByUser(User user){
-        List<Product> products = productRepository.findProductsByUser(user);
-        List<Product> sellingProducts  = new ArrayList<>();
-        for (Product p: products) {
-            if (p.getSelling() == true) {
-                sellingProducts.add(p);
-            }
-        }
-        return sellingProducts;
+        return productRepository.findProductsByUserAndIsSellingIsTrue(user);
     }
 
     public List<Product> findAllProducts() {
-       List<Product> allProducts = new ArrayList<>();
-       for (Product p: productRepository.findAll()) {
-           allProducts.add(p);
-       }
-       return allProducts;
+       return productRepository.findAll();
     }
+
     public List<Product> findProductsInStock() {
-        List<Product> allProducts = new ArrayList<>();
-        for (Product p: productRepository.findAll()) {
-            if (p.getQuantity() > 0 && p.getSelling() == true) { allProducts.add(p);}
-        }
-        return allProducts;
+        List<Product> prod = productRepository.findProductsByQuantityGreaterThanAndIsSellingIsTrue(0L);
+        return prod;
     }
 
     public Boolean updateProductQuantity(Product product,Long selectedQuantity) {
         if (selectedQuantity <= product.getQuantity()) {
             Long quantity = product.getQuantity();
-            product.setQuantity(quantity - selectedQuantity);
+            quantity +=selectedQuantity;
+            product.setQuantity(quantity);
             productRepository.save(product);
             return true;
         }
@@ -82,14 +67,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public Product findProductById(Long id) {
-        Product product = productRepository.findOne(id);
-        return product;
+        return productRepository.findOne(id);
     }
 
-
-    public List<Product> findProductsByKeyword(String keyword) {
+    public Set<Product> findProductsByKeyword(String keyword) {
         List<Product> productsInStock = findProductsInStock();
-        List<Product> productsThatMatchKeyword = new ArrayList<>();
+        Set<Product> productsThatMatchKeyword = new HashSet<>();
         for (Product p: productsInStock){
             if (p.getProductName().contains(keyword) || p.getDescription().contains(keyword) || p.getUser().getName().contains(keyword)) {
                 productsThatMatchKeyword.add(p);

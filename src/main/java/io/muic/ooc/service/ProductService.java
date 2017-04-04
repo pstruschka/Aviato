@@ -5,6 +5,7 @@ import io.muic.ooc.model.Product;
 import io.muic.ooc.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -19,9 +20,8 @@ public interface ProductService {
     Product findProductById(Long id);
     Boolean updateProductQuantity(Product product,Long quantity);
     List<Product> findProductsInStock();
-    public void notSelling(Product product);
-    List<Product> findProductsByKeyword(String keyword);
-    public void updateHistory(Cart cart);
+    void updateHistory(Cart cart);
+    Set<Product> findProductsByKeyword(String keyword);
 
     //public Product findProductByProductName(String productname);
 //    public List<Product> findProductsByUser(User user);

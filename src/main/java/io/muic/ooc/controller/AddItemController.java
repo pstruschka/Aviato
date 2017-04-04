@@ -35,6 +35,8 @@ public class AddItemController {
         if (!bindingResult.hasErrors()) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
+        product.setQuantitySold(0L);
+        product.setProfit(0L);
         productService.saveProduct(product,user);
         modelAndView.addObject("successMessage", "Product added successfully");
         modelAndView.addObject("product", new Product());

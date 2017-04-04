@@ -10,11 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 public interface CartService {
-    public Cart findCartWithUnconfirmedOrderByUserId(User user);
-    public Set<Cart> findCartsWithConfrimedOrderByUserId(User user);
-    public boolean canConfirmOrderOfCart(Cart cart);
-    public void confirmOrderOfCart(Cart cart);
-    public Set<Set<CartProduct>> getAllCartProducts(Set<Cart> carts);
-
-    
+    Cart findCartWithUnconfirmedOrderByUserId(User user);
+    Set<Cart> findCartsWithConfirmedOrderByUserId(User user);
+    boolean canConfirmOrderOfCart(Cart cart);
+    void confirmOrderOfCart(Cart cart);
 }

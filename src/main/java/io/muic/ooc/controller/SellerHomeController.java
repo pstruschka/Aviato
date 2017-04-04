@@ -78,7 +78,7 @@ public class SellerHomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);
-        productService.notSelling(product);
+        productService.removeProduct(product);
 //        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
         modelAndView.addObject("user", user);
 //        modelAndView.addObject("products", userProducts);
