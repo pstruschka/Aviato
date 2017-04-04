@@ -76,8 +76,6 @@ public class CartServiceImpl implements CartService{
         cartRepository.save(cart);
     }
 
-
-
     @Override
     public Set<Set<CartProduct>> getAllCartProducts(Set<Cart> carts){
         Set<Set<CartProduct>> set = new HashSet<>();

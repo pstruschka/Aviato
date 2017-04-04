@@ -62,7 +62,7 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user",user);
-
+        productService.updateHistory(cart);
         modelAndView.setViewName("/buyer/home");
         return modelAndView;
     }
