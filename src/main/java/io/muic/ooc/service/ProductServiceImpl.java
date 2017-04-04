@@ -24,6 +24,9 @@ public class ProductServiceImpl implements ProductService{
         product.setSelling(true);
         product.setRating(0);
         product.setUser(user);
+        product.setProfit(0L);
+        product.setQuantitySold(0L);
+
         productRepository.save(product);
     }
 

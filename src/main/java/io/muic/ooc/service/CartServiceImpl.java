@@ -64,9 +64,6 @@ public class CartServiceImpl implements CartService{
         if ( cartProductSet == null || cartProductSet.size()== 0) {
             return false;
         }
-
-        cart.setOrderConfirmed(true);
-        cartRepository.save(cart);
         return true;
     }
 
