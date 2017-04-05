@@ -4,7 +4,6 @@
 
 <head>
     <title>Buyer Home</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -13,7 +12,6 @@
     <link rel="stylesheet" th:href="@{/css/style.min.css}">
     <link rel="stylesheet" th:href="@{/css/switcher.css}">
     <link rel="stylesheet" th:href="@{/css/green.css}" class="colors">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" th:href="@{/images/32.png}" sizes="32x32" type="image/png"/>
@@ -40,8 +38,17 @@
                             <button class="btn btn-default dropdown-toggle" name="Product" type="Submit">Products</button>
                         </form>
                     </li>
-                    <li><button class="btn btn-default dropdown-toggle" name="About" href="#about">About</button></li>
-                    <li><button class="btn btn-default dropdown-toggle" name="Contact" href="#contact">Contact</button></li>
+                    <li>
+                        <form th:action="@{/buyer/viewcart}" method="get">
+                            <input type="hidden" th:value="${cart}" name="cart"/>
+                            <button class="btn btn-default dropdown-toggle" type="Submit">Go To Cart</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form th:action="@{/buyer/purchasehistory}" method="get">
+                            <button class="btn btn-default dropdown-toggle" name="Purchase History" type="Submit">Purchase History</button>
+                        </form>
+                    </li>
                     <li>
                         <form th:action="@{/logout}" method="get">
                             <button class="btn btn-default dropdown-toggle" name="Logout" type="Submit">Logout</button>
@@ -82,23 +89,6 @@
                                     <h2>Nightstand</h2>
                                     <p>Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
                                     <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy $400</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item m-center">
-                <div class="center-box">
-                    <span class="overlay-bg"></span>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
-                                <div class="hero-unit">
-                                    <h2>Hammock</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
-                                    <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy now $600</a>
                                 </div>
                             </div>
                         </div>
