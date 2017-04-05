@@ -33,40 +33,25 @@ public class ViewItemsController {
 
 
     @RequestMapping(value="/buyer/products",method = RequestMethod.GET)
-    public ModelAndView viewUserProducts() {
+    public ModelAndView viewUserProducts(@RequestParam(value="search",required=false, defaultValue = "") String search) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/buyer/viewproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
-        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
-        Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
+        if (search == null | search.equals("")){
+            ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsInStock());
+            modelAndView.addObject("products", userProducts);
+        }else{
+            ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByKeyword(search));
+            String searchQueryTitle = user.getName() + " | " + userProducts.size() + " result(s) for " + search + "";
+            modelAndView.addObject("products", userProducts);
+            modelAndView.addObject("search",search);
+            modelAndView.addObject("searchQueryTitle", searchQueryTitle);
 
-        modelAndView.addObject("cart",cart.getCartId());
-
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("products", userProducts);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/buyer/searchproducts",method = RequestMethod.POST)
-    @ResponseBody
-    public ModelAndView searchProducts(@RequestParam("search") String search) {
-        ModelAndView modelAndView = new ModelAndView("/buyer/searchproducts");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
-        System.out.println(user.getUsername()+" queried for "+ search);
-        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByKeyword(search));
-        //String searchQueryTitle = "${user.getName()} + ' | ' + ${products.size()} + ' result(s) for  &quot;'+ ${search} + '&quot;'";
-        Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
-        String searchQueryTitle = "";
-        if (!search.equals("")){
-            searchQueryTitle = user.getName() + " | " + userProducts.size() + " result(s) for " + search + "";
         }
-        modelAndView.addObject("products", userProducts);
+        Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
         modelAndView.addObject("cart",cart.getCartId());
-        modelAndView.addObject("user",user);
-        modelAndView.addObject("search",search);
-        modelAndView.addObject("searchQueryTitle", searchQueryTitle);
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 

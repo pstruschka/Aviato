@@ -36,7 +36,7 @@
             <ul id="navigation" class="nav navbar-nav navbar-right text-center">
                 <li>
                     <form th:action="@{/buyer/home}" method="get">
-                        <button class="btn btn-default dropdown-toggle" name="Home" type="Submit">Home</button>
+                        <button class="btn btn-default dropdown-toggle" type="Submit">Home</button>
                     </form>
                 </li>
                 <li>
@@ -47,7 +47,7 @@
                 </li>
                 <li>
                     <form th:action="@{/buyer/purchasehistory}" method="get">
-                        <button class="btn btn-default dropdown-toggle" name="Purchase History" type="Submit">Purchase History</button>
+                        <button class="btn btn-default dropdown-toggle" type="Submit">Purchase History</button>
                     </form>
                 </li>
                 <li>
@@ -64,6 +64,23 @@
 <section id="orderform" class="gray-bg padding-top-bottom" ng-controller="orderController">
     <div class="page-header">
         <h3 th:text="${user.getName()} + ' | Products View'"></h3>
+    </div>
+    <div class="col-md-12">
+        <form action="#" th:action="@{/buyer/products}" method="get">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" id="search" name="search" class="form-control input-sm-10" th:placeholder="${search}" />
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-info btn-sm-10" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="page-header">
+        <h3 th:text="${searchQueryTitle}"></h3>
     </div>
     <div class="container">
         <header class="section-header text-center">
