@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService{
     public Boolean updateProductQuantity(Product product,Long selectedQuantity) {
         if (selectedQuantity <= product.getQuantity()) {
             Long quantity = product.getQuantity();
-            quantity +=selectedQuantity;
+            quantity -=selectedQuantity;
             product.setQuantity(quantity);
             productRepository.save(product);
             return true;

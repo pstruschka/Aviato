@@ -107,7 +107,7 @@ public class ViewCartController {
         User user = userService.findUserByUsername(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         CartProduct cartProduct =  cartProductService.findCartProductsById(cartProductId);
-        productService.updateProductQuantity(cartProduct.getProduct(),cartProduct.getQuantity());
+        productService.updateProductQuantity(cartProduct.getProduct(),-cartProduct.getQuantity());
         cartProductService.remove(cartProductId);
 
 
