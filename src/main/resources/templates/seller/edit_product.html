@@ -3,14 +3,27 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Product</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-6">
+            <form class="fixtop col-lg-6 col-md-6 col-xs-6" th:action="@{/seller/home}" method="get">
+                <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Home Page</button>
+            </form>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6">
+            <form class="fixtop col-lg-6 col-md-6 col-xs-6" th:action="@{/seller/myproducts}" method="get">
+                <button class="btn btn-md btn-success btn-block" type="Submit">View Products</button>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

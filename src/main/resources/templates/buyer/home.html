@@ -35,7 +35,7 @@
                 <ul id="navigation" class="nav navbar-nav navbar-right text-center">
                     <li>
                         <form th:action="@{/buyer/products}" method="get">
-                            <button class="btn btn-default dropdown-toggle" name="Product" type="Submit">Products</button>
+                            <button class="btn btn-default dropdown-toggle" type="Submit">Products</button>
                         </form>
                     </li>
                     <li>
@@ -46,7 +46,7 @@
                     </li>
                     <li>
                         <form th:action="@{/buyer/purchasehistory}" method="get">
-                            <button class="btn btn-default dropdown-toggle" name="Purchase History" type="Submit">Purchase History</button>
+                            <button class="btn btn-default dropdown-toggle" type="Submit">Purchase History</button>
                         </form>
                     </li>
                     <li>
@@ -86,9 +86,8 @@
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
                                 <div class="hero-unit">
-                                    <h2>Nightstand</h2>
-                                    <p>Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
-                                    <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy $400</a>
+                                    <h3>Welcome, Willkommen, Velkommen, स्वागत, ਸਵਾਗਤ </h3>
+                                    <a class="btn btn-store outline smooth-scroll" th:href="@{/buyer/products}" method="get">buy now</a>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +105,7 @@
                 <div class="col-md-4 anima fadeInLeft">
                     <header class="section-header cta-message">
                         <h2>About company</h2>
-                        <h4>Pellentesque interdum eget</h4>
+                        <h4>Great Company</h4>
                     </header>
                 </div>
                 <div class="col-md-8 cta-message anima fade-up">

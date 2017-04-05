@@ -165,3 +165,8 @@ label {
 	color: #fff;
 	background-color: #E7E3E2;
 }
+
+.fixtop {
+	top: 0;
+	position: fixed;
+}
