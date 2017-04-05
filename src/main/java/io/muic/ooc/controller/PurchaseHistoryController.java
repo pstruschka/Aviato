@@ -1,7 +1,6 @@
 package io.muic.ooc.controller;
 
 import io.muic.ooc.model.Cart;
-import io.muic.ooc.model.CartProduct;
 import io.muic.ooc.model.User;
 import io.muic.ooc.service.CartService;
 import io.muic.ooc.service.UserService;
@@ -21,10 +20,11 @@ import java.util.Set;
 @Controller
 public class PurchaseHistoryController {
     @Autowired
-    CartService cartService;
+    private CartService cartService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
 
     @RequestMapping(value = "/buyer/purchasehistory",method = RequestMethod.GET)
     public ModelAndView viewPurchaseHistory() {

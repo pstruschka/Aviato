@@ -74,7 +74,7 @@ public class ViewItemsController {
     @ResponseBody
     public ModelAndView buyProducts(@ModelAttribute("product") Long productId,
                                     @RequestParam("quantity") Long quantity, Model model) {
-        ModelAndView modelAndView = new ModelAndView("/buyer/searchproducts");
+        ModelAndView modelAndView = new ModelAndView("/buyer/viewproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);
