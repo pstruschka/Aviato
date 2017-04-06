@@ -34,7 +34,7 @@ public class SellerHistoryController {
         List<Product> products = productService.findProductsByUser(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("products",products);
-        modelAndView.setViewName("/seller/sellerhistory");
+        modelAndView.setViewName("seller/sellerhistory");
         return modelAndView;
     }
 }

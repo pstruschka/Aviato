@@ -29,13 +29,13 @@ public class SellerHomeController {
         User user = userService.findUserByUsername(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("/seller/home");
+        modelAndView.setViewName("seller/home");
         return modelAndView;
     }
     @RequestMapping(value="/seller/additem", method = RequestMethod.GET)
     public ModelAndView add(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/seller/additem");
+        modelAndView.setViewName("seller/additem");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = new Product();
@@ -48,7 +48,7 @@ public class SellerHomeController {
     @RequestMapping(value="/seller/myproducts",method = RequestMethod.GET)
     public ModelAndView viewUserProducts() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/seller/myproducts");
+        modelAndView.setViewName("seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //System.out.println(auth.getName());
         User user = userService.findUserByUsername(auth.getName());
@@ -64,7 +64,7 @@ public class SellerHomeController {
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(id);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/seller/edit_product");
+        modelAndView.setViewName("seller/edit_product");
         modelAndView.addObject("user", user);
         modelAndView.addObject("product",product);
         return modelAndView;
@@ -74,7 +74,7 @@ public class SellerHomeController {
     @RequestMapping(value="/seller/delete_product",method = RequestMethod.POST)
     public ModelAndView deleteUserProduct(@RequestParam("product") Long productId) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/seller/myproducts");
+        modelAndView.setViewName("seller/myproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Product product = productService.findProductById(productId);

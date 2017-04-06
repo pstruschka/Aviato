@@ -33,7 +33,7 @@ public class PurchaseHistoryController {
         Set<Cart> cartHashSet = cartService.findCartsWithConfirmedOrderByUserId(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("carts",cartHashSet);
-        modelAndView.setViewName("/buyer/purchasehistory");
+        modelAndView.setViewName("buyer/purchasehistory");
         return modelAndView;
     }
 }

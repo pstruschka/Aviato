@@ -35,7 +35,7 @@ public class AccessDeniedController implements ErrorController{
     @RequestMapping("/404")
     public ModelAndView error(@ModelAttribute("message") String message){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/error/error");
+        modelAndView.setViewName("error/error");
         modelAndView.addObject("message", message);
         return modelAndView;
     }

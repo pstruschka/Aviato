@@ -35,7 +35,7 @@ public class ViewItemsController {
     @RequestMapping(value="/buyer/products",method = RequestMethod.GET)
     public ModelAndView viewUserProducts(@RequestParam(value="search",required=false, defaultValue = "") String search) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/buyer/viewproducts");
+        modelAndView.setViewName("buyer/viewproducts");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         if (search == null | search.equals("")){

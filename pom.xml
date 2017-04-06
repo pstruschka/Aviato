@@ -83,8 +83,12 @@
 			<!-- Make this jar executable -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
 				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 					<archive>
 						<manifest>
 							<mainClass>io.muic.ooc.WebApplication</mainClass>

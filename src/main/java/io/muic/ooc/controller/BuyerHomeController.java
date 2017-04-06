@@ -35,7 +35,7 @@ public class BuyerHomeController {
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 
-        modelAndView.setViewName("/buyer/home");
+        modelAndView.setViewName("buyer/home");
         return modelAndView;
     }
 
