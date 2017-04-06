@@ -34,20 +34,20 @@ public class EditProductController {
     public ModelAndView editCurrentProduct(@Valid Product product,BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("seller/myproducts");
-
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
         if (!bindingResult.hasErrors()) {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findUserByUsername(auth.getName());
             //Product originalProduct = productService.findProductByIdAndUser(product.getId(),user);
             //productService.removeProduct(originalProduct, user);
             productService.saveProduct(product,user);
             modelAndView.addObject("successMessage", "Product edited successfully");
             //modelAndView.addObject("product", new Product());
-            ArrayList<Product> userProducts = new ArrayList<>(productService.findProductsByUser(user));
             modelAndView.addObject("user", user);
             modelAndView.addObject("products", userProducts);
         }
+        modelAndView.addObject("products", userProducts);
+        modelAndView.addObject("user", user);
         return modelAndView;
 
     }

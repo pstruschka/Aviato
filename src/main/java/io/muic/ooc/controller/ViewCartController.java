@@ -42,7 +42,7 @@ public class ViewCartController {
     public ModelAndView viewCart(@RequestParam("cart") Cart cart ){
         Long totalPrice;
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("buyer/viewcart");
+        modelAndView.setViewName("/buyer/viewcart");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Set<CartProduct> cartProducts = new HashSet<>(cartProductService.findCartProductsByCart(cart));
@@ -61,10 +61,13 @@ public class ViewCartController {
         cartService.confirmOrderOfCart(cart);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
+        Cart cart1 = cartService.findCartWithUnconfirmedOrderByUserId(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user",user);
+        modelAndView.addObject("cart",cart1);
+        modelAndView.addObject("totalPrice",0);
         productService.updateHistory(cart);
-        modelAndView.setViewName("buyer/home");
+        modelAndView.setViewName("buyer/viewcart");
         return modelAndView;
     }
 
@@ -84,7 +87,7 @@ public class ViewCartController {
 
         if (diffProductPricethanPriceBoughtAt.size() != 0) {
             modelAndView.addObject("cartProducts",cartProducts);
-            modelAndView.setViewName("buyer/viewcart");
+            modelAndView.setViewName("/buyer/viewcart");
             modelAndView.addObject("priceChanged",diffProductPricethanPriceBoughtAt);
             return modelAndView;
         }
@@ -94,10 +97,10 @@ public class ViewCartController {
             String emptyMsg = "Your cart is empty";
             modelAndView.addObject("cart",cart);
             modelAndView.addObject("emptyMsg",emptyMsg);
-            modelAndView.setViewName("buyer/viewcart");
+            modelAndView.setViewName("/buyer/viewcart");
             return modelAndView;
         }
-        modelAndView.setViewName("buyer/payment");
+        modelAndView.setViewName("/buyer/payment");
         return modelAndView;
     }
 

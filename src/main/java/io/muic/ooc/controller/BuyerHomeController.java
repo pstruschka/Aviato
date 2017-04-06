@@ -30,12 +30,11 @@ public class BuyerHomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         Cart cart = cartService.findCartWithUnconfirmedOrderByUserId(user);
-
         modelAndView.addObject("cart",cart.getCartId());
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getUsername() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-
         modelAndView.setViewName("buyer/home");
+        modelAndView.addObject("user",user);
         return modelAndView;
     }
 
